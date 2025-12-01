@@ -132,7 +132,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       if (!ctx) return [];
 
       // Dynamic font size based on text length
-      const fontSize = text.length > 14 ? 50 : text.length > 10 ? 65 : 100;
+      const fontSize = text.length > 14 ? 30 : text.length > 10 ? 65 : 100;
       const padding = 20;
 
       ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
@@ -305,7 +305,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         if (!ctx) return;
 
         // Dynamic font size based on text length
-        const fontSize = text.length > 14 ? 50 : text.length > 10 ? 65 : 100;
+        const fontSize = text.length > 14 ? 30 : text.length > 10 ? 65 : 100;
         const padding = 20;
 
         ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
