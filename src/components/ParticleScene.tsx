@@ -45,7 +45,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     rendererRef.current = renderer;
 
     // Create particles
-    const count = 30000;
+    const count = 12000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
@@ -107,7 +107,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
 
     // Auto sequence
     const startSequence = () => {
-      const texts = ['WELCOME', 'THIS IS\nKAUSHIK', 'I AM GEN AI DEVELOPER'];
+      const texts = ['WELCOME', 'KAUSHIK', 'GEN AI'];
       
       const runSequence = () => {
         const text = texts[sequenceRef.current % texts.length];
@@ -131,33 +131,22 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       const ctx = canvas.getContext('2d');
       if (!ctx) return [];
 
-      // Very small font size
-      const fontSize = 18;
+      const fontSize = 100;
       const padding = 20;
-      const lineHeight = fontSize * 1.3;
-      
-      // Split text into lines
-      const lines = text.split('\n');
-      
-      ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
-      
-      // Calculate canvas size based on all lines
-      const maxWidth = Math.max(...lines.map(line => ctx.measureText(line).width));
-      const totalHeight = lines.length * lineHeight;
 
-      canvas.width = maxWidth + padding * 2;
-      canvas.height = totalHeight + padding * 2;
+      ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
+      const textMetrics = ctx.measureText(text);
+      const textWidth = textMetrics.width;
+      const textHeight = fontSize;
+
+      canvas.width = textWidth + padding * 2;
+      canvas.height = textHeight + padding * 2;
 
       ctx.fillStyle = 'white';
       ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'center';
-      
-      // Draw each line
-      lines.forEach((line, index) => {
-        const yPos = canvas.height / 2 - ((lines.length - 1) * lineHeight) / 2 + (index * lineHeight);
-        ctx.fillText(line, canvas.width / 2, yPos);
-      });
+      ctx.fillText(text, canvas.width / 2, canvas.height / 2);
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const pixels = imageData.data;
@@ -169,12 +158,12 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           const x = (i / 4) % canvas.width;
           const y = Math.floor(i / 4 / canvas.width);
           
-            if (Math.random() < 0.5) {
-              points.push({
-                x: (x - canvas.width / 2) / 5,
-                y: -(y - canvas.height / 2) / 5,
-              });
-            }
+          if (Math.random() < 0.3) {
+            points.push({
+              x: (x - canvas.width / 2) / (fontSize / 10),
+              y: -(y - canvas.height / 2) / (fontSize / 10),
+            });
+          }
         }
       }
 
@@ -200,13 +189,13 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         if (i < textPoints.length) {
           targetPositions[i * 3] = textPoints[i].x;
           targetPositions[i * 3 + 1] = textPoints[i].y;
-          targetPositions[i * 3 + 2] = 2;
+          targetPositions[i * 3 + 2] = 0;
         } else {
           const angle = Math.random() * Math.PI * 2;
-          const radius = Math.random() * 30 + 20;
+          const radius = Math.random() * 20 + 10;
           targetPositions[i * 3] = Math.cos(angle) * radius;
           targetPositions[i * 3 + 1] = Math.sin(angle) * radius;
-          targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 20 - 15;
+          targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
         }
       }
 
@@ -306,7 +295,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         const THREE = (window as any).THREE;
         const gsap = (window as any).gsap;
         const particles = particlesRef.current;
-        const count = 30000;
+        const count = 12000;
 
         currentStateRef.current = 'text';
         
@@ -314,33 +303,22 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // Very small font size
-        const fontSize = 18;
+        const fontSize = 100;
         const padding = 20;
-        const lineHeight = fontSize * 1.3;
-        
-        // Split text into lines
-        const lines = text.split('\n');
-        
-        ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
-        
-        // Calculate canvas size based on all lines
-        const maxWidth = Math.max(...lines.map(line => ctx.measureText(line).width));
-        const totalHeight = lines.length * lineHeight;
 
-        canvas.width = maxWidth + padding * 2;
-        canvas.height = totalHeight + padding * 2;
+        ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
+        const textMetrics = ctx.measureText(text);
+        const textWidth = textMetrics.width;
+        const textHeight = fontSize;
+
+        canvas.width = textWidth + padding * 2;
+        canvas.height = textHeight + padding * 2;
 
         ctx.fillStyle = 'white';
         ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'center';
-        
-        // Draw each line
-        lines.forEach((line, index) => {
-          const yPos = canvas.height / 2 - ((lines.length - 1) * lineHeight) / 2 + (index * lineHeight);
-          ctx.fillText(line, canvas.width / 2, yPos);
-        });
+        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
 
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const pixels = imageData.data;
@@ -352,10 +330,10 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
             const x = (i / 4) % canvas.width;
             const y = Math.floor(i / 4 / canvas.width);
             
-            if (Math.random() < 0.5) {
+            if (Math.random() < 0.3) {
               points.push({
-                x: (x - canvas.width / 2) / 5,
-                y: -(y - canvas.height / 2) / 5,
+                x: (x - canvas.width / 2) / (fontSize / 10),
+                y: -(y - canvas.height / 2) / (fontSize / 10),
               });
             }
           }
@@ -375,13 +353,13 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           if (i < points.length) {
             targetPositions[i * 3] = points[i].x;
             targetPositions[i * 3 + 1] = points[i].y;
-            targetPositions[i * 3 + 2] = 2;
+            targetPositions[i * 3 + 2] = 0;
           } else {
             const angle = Math.random() * Math.PI * 2;
-            const radius = Math.random() * 30 + 20;
+            const radius = Math.random() * 20 + 10;
             targetPositions[i * 3] = Math.cos(angle) * radius;
             targetPositions[i * 3 + 1] = Math.sin(angle) * radius;
-            targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 20 - 15;
+            targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
           }
         }
 
