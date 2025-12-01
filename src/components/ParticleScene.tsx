@@ -256,7 +256,6 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       currentStateRef.current = 'sphere';
       const positions = particles.geometry.attributes.position.array;
       const targetPositions = new Float32Array(count * 3);
-      const colors = particles.geometry.attributes.color.array;
 
       for (let i = 0; i < count; i++) {
         const point = sphericalDistribution(i);
@@ -264,14 +263,6 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         targetPositions[i * 3] = point.x + (Math.random() - 0.5) * 0.5;
         targetPositions[i * 3 + 1] = point.y + (Math.random() - 0.5) * 0.5;
         targetPositions[i * 3 + 2] = point.z + (Math.random() - 0.5) * 0.5;
-
-        const depth = Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) / 8;
-        const color = new THREE.Color();
-        color.setHSL(0.5 + depth * 0.2, 0.7, 0.4 + depth * 0.3);
-        
-        colors[i * 3] = color.r;
-        colors[i * 3 + 1] = color.g;
-        colors[i * 3 + 2] = color.b;
       }
 
       for (let i = 0; i < positions.length; i += 3) {
@@ -283,19 +274,6 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           ease: 'power2.inOut',
           onUpdate: () => {
             particles.geometry.attributes.position.needsUpdate = true;
-          },
-        });
-      }
-
-      for (let i = 0; i < colors.length; i += 3) {
-        gsap.to(particles.geometry.attributes.color.array, {
-          [i]: colors[i],
-          [i + 1]: colors[i + 1],
-          [i + 2]: colors[i + 2],
-          duration: 2,
-          ease: 'power2.inOut',
-          onUpdate: () => {
-            particles.geometry.attributes.color.needsUpdate = true;
           },
         });
       }
