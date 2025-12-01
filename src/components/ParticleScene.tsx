@@ -105,28 +105,6 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     };
     animate();
 
-    // Create down arrow shape
-    const createDownArrowPoints = () => {
-      const points: { x: number; y: number }[] = [];
-      
-      // Arrow shaft (vertical line)
-      for (let y = -5; y <= 5; y += 0.3) {
-        points.push({ x: 0, y: y });
-      }
-      
-      // Arrow head (chevron shape at bottom)
-      for (let i = 0; i <= 20; i++) {
-        const t = i / 20;
-        const x = t * 3; // width of arrow head
-        const y = 5 + t * 3; // pointing down
-        points.push({ x: x, y: y });
-        points.push({ x: -x, y: y });
-      }
-      
-      // Position arrow at bottom of screen (shift down by ~8 units)
-      return points.map(p => ({ x: p.x, y: p.y - 10 }));
-    };
-
     // Auto sequence
     const startSequence = () => {
       const textConfigs = [
@@ -144,30 +122,13 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       
       const runSequence = () => {
         const config = textConfigs[sequenceRef.current % textConfigs.length];
+        morphToMultiLineText(config);
+        sequenceRef.current++;
         
-        if (sequenceRef.current === 0) {
-          // First time: show text then arrow
-          morphToMultiLineText(config);
-          setTimeout(() => {
-            morphToSphere();
-            setTimeout(() => {
-              morphToDownArrow();
-              setTimeout(() => {
-                sequenceRef.current++;
-                runSequence();
-              }, 2000);
-            }, 2000);
-          }, 3000);
-        } else {
-          // Subsequent cycles: normal rotation
-          morphToMultiLineText(config);
-          sequenceRef.current++;
-          
-          setTimeout(() => {
-            morphToSphere();
-            setTimeout(runSequence, 2000);
-          }, 3000);
-        }
+        setTimeout(() => {
+          morphToSphere();
+          setTimeout(runSequence, 2000);
+        }, 3000);
       };
 
       setTimeout(runSequence, 1000);
@@ -267,50 +228,6 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           targetPositions[i * 3 + 1] = textPoints[i].y;
           targetPositions[i * 3 + 2] = 0;
         } else {
-          const angle = Math.random() * Math.PI * 2;
-          const radius = Math.random() * 20 + 10;
-          targetPositions[i * 3] = Math.cos(angle) * radius;
-          targetPositions[i * 3 + 1] = Math.sin(angle) * radius;
-          targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-        }
-      }
-
-      for (let i = 0; i < positions.length; i += 3) {
-        gsap.to(particles.geometry.attributes.position.array, {
-          [i]: targetPositions[i],
-          [i + 1]: targetPositions[i + 1],
-          [i + 2]: targetPositions[i + 2],
-          duration: 2,
-          ease: 'power2.inOut',
-          onUpdate: () => {
-            particles.geometry.attributes.position.needsUpdate = true;
-          },
-        });
-      }
-    };
-
-    const morphToDownArrow = () => {
-      if (!particles || !gsap) return;
-      
-      currentStateRef.current = 'arrow';
-      const arrowPoints = createDownArrowPoints();
-      const positions = particles.geometry.attributes.position.array;
-      const targetPositions = new Float32Array(count * 3);
-
-      gsap.to(particles.rotation, {
-        x: 0,
-        y: 0,
-        z: 0,
-        duration: 0.5,
-      });
-
-      for (let i = 0; i < count; i++) {
-        if (i < arrowPoints.length) {
-          targetPositions[i * 3] = arrowPoints[i].x;
-          targetPositions[i * 3 + 1] = arrowPoints[i].y;
-          targetPositions[i * 3 + 2] = 0;
-        } else {
-          // Scatter remaining particles
           const angle = Math.random() * Math.PI * 2;
           const radius = Math.random() * 20 + 10;
           targetPositions[i * 3] = Math.cos(angle) * radius;
