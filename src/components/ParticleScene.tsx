@@ -1,0 +1,393 @@
+import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+
+interface ParticleSceneProps {
+  morphToText?: string;
+  onMorphComplete?: () => void;
+}
+
+const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleSceneProps, ref) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<any>(null);
+  const cameraRef = useRef<any>(null);
+  const rendererRef = useRef<any>(null);
+  const particlesRef = useRef<any>(null);
+  const currentStateRef = useRef<string>('sphere');
+  const animationFrameRef = useRef<number>();
+  const sequenceRef = useRef<number>(0);
+
+  useImperativeHandle(ref, () => ({}));
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    if (typeof window === 'undefined' || !(window as any).THREE) return;
+
+    const THREE = (window as any).THREE;
+    const gsap = (window as any).gsap;
+
+    // Scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 1);
+    containerRef.current.appendChild(renderer.domElement);
+
+    camera.position.z = 25;
+
+    sceneRef.current = scene;
+    cameraRef.current = camera;
+    rendererRef.current = renderer;
+
+    // Create particles
+    const count = 12000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+
+    const sphericalDistribution = (i: number) => {
+      const phi = Math.acos(-1 + (2 * i) / count);
+      const theta = Math.sqrt(count * Math.PI) * phi;
+      
+      return {
+        x: 8 * Math.cos(theta) * Math.sin(phi),
+        y: 8 * Math.sin(theta) * Math.sin(phi),
+        z: 8 * Math.cos(phi),
+      };
+    };
+
+    for (let i = 0; i < count; i++) {
+      const point = sphericalDistribution(i);
+      
+      positions[i * 3] = point.x + (Math.random() - 0.5) * 0.5;
+      positions[i * 3 + 1] = point.y + (Math.random() - 0.5) * 0.5;
+      positions[i * 3 + 2] = point.z + (Math.random() - 0.5) * 0.5;
+
+      const color = new THREE.Color();
+      const depth = Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) / 8;
+      color.setHSL(0.5 + depth * 0.2, 0.7, 0.4 + depth * 0.3);
+
+      colors[i * 3] = color.r;
+      colors[i * 3 + 1] = color.g;
+      colors[i * 3 + 2] = color.b;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 0.08,
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+      transparent: true,
+      opacity: 0.8,
+      sizeAttenuation: true,
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+    particlesRef.current = particles;
+
+    // Animation loop
+    const animate = () => {
+      animationFrameRef.current = requestAnimationFrame(animate);
+      
+      if (currentStateRef.current === 'sphere' && particles) {
+        particles.rotation.y += 0.002;
+      }
+      
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    // Auto sequence
+    const startSequence = () => {
+      const texts = ['WELCOME', 'KAUSHIK', 'GEN AI'];
+      
+      const runSequence = () => {
+        const text = texts[sequenceRef.current % texts.length];
+        morphToTextInternal(text);
+        sequenceRef.current++;
+        
+        setTimeout(() => {
+          morphToSphere();
+          setTimeout(runSequence, 2000);
+        }, 3000);
+      };
+
+      setTimeout(runSequence, 1000);
+    };
+
+    startSequence();
+
+    // Text morphing functions
+    const createTextPoints = (text: string) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return [];
+
+      const fontSize = 100;
+      const padding = 20;
+
+      ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
+      const textMetrics = ctx.measureText(text);
+      const textWidth = textMetrics.width;
+      const textHeight = fontSize;
+
+      canvas.width = textWidth + padding * 2;
+      canvas.height = textHeight + padding * 2;
+
+      ctx.fillStyle = 'white';
+      ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
+      ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const pixels = imageData.data;
+      const points: { x: number; y: number }[] = [];
+      const threshold = 128;
+
+      for (let i = 0; i < pixels.length; i += 4) {
+        if (pixels[i] > threshold) {
+          const x = (i / 4) % canvas.width;
+          const y = Math.floor(i / 4 / canvas.width);
+          
+          if (Math.random() < 0.3) {
+            points.push({
+              x: (x - canvas.width / 2) / (fontSize / 10),
+              y: -(y - canvas.height / 2) / (fontSize / 10),
+            });
+          }
+        }
+      }
+
+      return points;
+    };
+
+    const morphToTextInternal = (text: string) => {
+      if (!particles || !gsap) return;
+      
+      currentStateRef.current = 'text';
+      const textPoints = createTextPoints(text);
+      const positions = particles.geometry.attributes.position.array;
+      const targetPositions = new Float32Array(count * 3);
+
+      gsap.to(particles.rotation, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 0.5,
+      });
+
+      for (let i = 0; i < count; i++) {
+        if (i < textPoints.length) {
+          targetPositions[i * 3] = textPoints[i].x;
+          targetPositions[i * 3 + 1] = textPoints[i].y;
+          targetPositions[i * 3 + 2] = 0;
+        } else {
+          const angle = Math.random() * Math.PI * 2;
+          const radius = Math.random() * 20 + 10;
+          targetPositions[i * 3] = Math.cos(angle) * radius;
+          targetPositions[i * 3 + 1] = Math.sin(angle) * radius;
+          targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+        }
+      }
+
+      for (let i = 0; i < positions.length; i += 3) {
+        gsap.to(particles.geometry.attributes.position.array, {
+          [i]: targetPositions[i],
+          [i + 1]: targetPositions[i + 1],
+          [i + 2]: targetPositions[i + 2],
+          duration: 2,
+          ease: 'power2.inOut',
+          onUpdate: () => {
+            particles.geometry.attributes.position.needsUpdate = true;
+          },
+        });
+      }
+    };
+
+    const morphToSphere = () => {
+      if (!particles || !gsap) return;
+      
+      currentStateRef.current = 'sphere';
+      const positions = particles.geometry.attributes.position.array;
+      const targetPositions = new Float32Array(count * 3);
+      const colors = particles.geometry.attributes.color.array;
+
+      for (let i = 0; i < count; i++) {
+        const point = sphericalDistribution(i);
+        
+        targetPositions[i * 3] = point.x + (Math.random() - 0.5) * 0.5;
+        targetPositions[i * 3 + 1] = point.y + (Math.random() - 0.5) * 0.5;
+        targetPositions[i * 3 + 2] = point.z + (Math.random() - 0.5) * 0.5;
+
+        const depth = Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) / 8;
+        const color = new THREE.Color();
+        color.setHSL(0.5 + depth * 0.2, 0.7, 0.4 + depth * 0.3);
+        
+        colors[i * 3] = color.r;
+        colors[i * 3 + 1] = color.g;
+        colors[i * 3 + 2] = color.b;
+      }
+
+      for (let i = 0; i < positions.length; i += 3) {
+        gsap.to(particles.geometry.attributes.position.array, {
+          [i]: targetPositions[i],
+          [i + 1]: targetPositions[i + 1],
+          [i + 2]: targetPositions[i + 2],
+          duration: 2,
+          ease: 'power2.inOut',
+          onUpdate: () => {
+            particles.geometry.attributes.position.needsUpdate = true;
+          },
+        });
+      }
+
+      for (let i = 0; i < colors.length; i += 3) {
+        gsap.to(particles.geometry.attributes.color.array, {
+          [i]: colors[i],
+          [i + 1]: colors[i + 1],
+          [i + 2]: colors[i + 2],
+          duration: 2,
+          ease: 'power2.inOut',
+          onUpdate: () => {
+            particles.geometry.attributes.color.needsUpdate = true;
+          },
+        });
+      }
+    };
+
+    // Handle resize
+    const handleResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      if (containerRef.current && renderer.domElement) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (morphToText && particlesRef.current && (window as any).gsap) {
+      const morphToTextInternal = (text: string) => {
+        if (!particlesRef.current) return;
+        
+        const THREE = (window as any).THREE;
+        const gsap = (window as any).gsap;
+        const particles = particlesRef.current;
+        const count = 12000;
+
+        currentStateRef.current = 'text';
+        
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const fontSize = 100;
+        const padding = 20;
+
+        ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
+        const textMetrics = ctx.measureText(text);
+        const textWidth = textMetrics.width;
+        const textHeight = fontSize;
+
+        canvas.width = textWidth + padding * 2;
+        canvas.height = textHeight + padding * 2;
+
+        ctx.fillStyle = 'white';
+        ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
+        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const pixels = imageData.data;
+        const points: { x: number; y: number }[] = [];
+        const threshold = 128;
+
+        for (let i = 0; i < pixels.length; i += 4) {
+          if (pixels[i] > threshold) {
+            const x = (i / 4) % canvas.width;
+            const y = Math.floor(i / 4 / canvas.width);
+            
+            if (Math.random() < 0.3) {
+              points.push({
+                x: (x - canvas.width / 2) / (fontSize / 10),
+                y: -(y - canvas.height / 2) / (fontSize / 10),
+              });
+            }
+          }
+        }
+
+        const positions = particles.geometry.attributes.position.array;
+        const targetPositions = new Float32Array(count * 3);
+
+        gsap.to(particles.rotation, {
+          x: 0,
+          y: 0,
+          z: 0,
+          duration: 0.5,
+        });
+
+        for (let i = 0; i < count; i++) {
+          if (i < points.length) {
+            targetPositions[i * 3] = points[i].x;
+            targetPositions[i * 3 + 1] = points[i].y;
+            targetPositions[i * 3 + 2] = 0;
+          } else {
+            const angle = Math.random() * Math.PI * 2;
+            const radius = Math.random() * 20 + 10;
+            targetPositions[i * 3] = Math.cos(angle) * radius;
+            targetPositions[i * 3 + 1] = Math.sin(angle) * radius;
+            targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+          }
+        }
+
+        for (let i = 0; i < positions.length; i += 3) {
+          gsap.to(particles.geometry.attributes.position.array, {
+            [i]: targetPositions[i],
+            [i + 1]: targetPositions[i + 1],
+            [i + 2]: targetPositions[i + 2],
+            duration: 2,
+            ease: 'power2.inOut',
+            onUpdate: () => {
+              particles.geometry.attributes.position.needsUpdate = true;
+            },
+          });
+        }
+
+        setTimeout(() => {
+          if (onMorphComplete) onMorphComplete();
+        }, 3000);
+      };
+
+      morphToTextInternal(morphToText);
+    }
+  }, [morphToText, onMorphComplete]);
+
+  return <div ref={containerRef} id="three-container" />;
+});
+
+ParticleScene.displayName = 'ParticleScene';
+
+export default ParticleScene;
