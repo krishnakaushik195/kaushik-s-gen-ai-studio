@@ -70,8 +70,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
 
       const color = new THREE.Color();
       const depth = Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) / 8;
-      // Gold to yellow gradient (hue 45-50 = gold/yellow range)
-      color.setHSL(0.12 + depth * 0.05, 0.9, 0.5 + depth * 0.2);
+      color.setHSL(0.5 + depth * 0.2, 0.7, 0.4 + depth * 0.3);
 
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
@@ -268,8 +267,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
 
         const depth = Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) / 8;
         const color = new THREE.Color();
-        // Gold to yellow gradient
-        color.setHSL(0.12 + depth * 0.05, 0.9, 0.5 + depth * 0.2);
+        color.setHSL(0.5 + depth * 0.2, 0.7, 0.4 + depth * 0.3);
         
         colors[i * 3] = color.r;
         colors[i * 3 + 1] = color.g;
