@@ -45,7 +45,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     rendererRef.current = renderer;
 
     // Create particles
-    const count = 20000;
+    const count = 30000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
@@ -169,7 +169,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           const x = (i / 4) % canvas.width;
           const y = Math.floor(i / 4 / canvas.width);
           
-            if (Math.random() < 0.3) {
+            if (Math.random() < 0.5) {
               points.push({
                 x: (x - canvas.width / 2) / 5,
                 y: -(y - canvas.height / 2) / 5,
@@ -306,7 +306,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         const THREE = (window as any).THREE;
         const gsap = (window as any).gsap;
         const particles = particlesRef.current;
-        const count = 20000;
+        const count = 30000;
 
         currentStateRef.current = 'text';
         
@@ -352,7 +352,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
             const x = (i / 4) % canvas.width;
             const y = Math.floor(i / 4 / canvas.width);
             
-            if (Math.random() < 0.3) {
+            if (Math.random() < 0.5) {
               points.push({
                 x: (x - canvas.width / 2) / 5,
                 y: -(y - canvas.height / 2) / 5,
