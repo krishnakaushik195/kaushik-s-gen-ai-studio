@@ -45,7 +45,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     rendererRef.current = renderer;
 
     // Create particles
-    const count = 12000;
+    const count = 18000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
@@ -107,7 +107,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
 
     // Auto sequence
     const startSequence = () => {
-      const texts = ['WELCOME', 'KAUSHIK', 'GEN AI'];
+      const texts = ['WELCOME', 'THIS IS KAUSHIK', 'I AM GEN AI DEVELOPER'];
       
       const runSequence = () => {
         const text = texts[sequenceRef.current % texts.length];
@@ -295,7 +295,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         const THREE = (window as any).THREE;
         const gsap = (window as any).gsap;
         const particles = particlesRef.current;
-        const count = 12000;
+        const count = 18000;
 
         currentStateRef.current = 'text';
         
