@@ -81,11 +81,11 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.15,
+      size: 0.08,
       vertexColors: true,
       blending: THREE.AdditiveBlending,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.8,
       sizeAttenuation: true,
     });
 
@@ -182,7 +182,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           const x = (i / 4) % canvas.width;
           const y = Math.floor(i / 4 / canvas.width);
           
-          if (Math.random() < 0.6) {
+          if (Math.random() < 0.3) {
             points.push({
               x: (x - canvas.width / 2) / 10,
               y: -(y - canvas.height / 2) / 10,
@@ -354,7 +354,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
             const x = (i / 4) % canvas.width;
             const y = Math.floor(i / 4 / canvas.width);
             
-            if (Math.random() < 0.6) {
+            if (Math.random() < 0.3) {
               points.push({
                 x: (x - canvas.width / 2) / (fontSize / 10),
                 y: -(y - canvas.height / 2) / (fontSize / 10),
