@@ -131,7 +131,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       const ctx = canvas.getContext('2d');
       if (!ctx) return [];
 
-      const fontSize = 100;
+      const fontSize = 60;
       const padding = 20;
 
       ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
@@ -303,7 +303,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const fontSize = 100;
+        const fontSize = 60;
         const padding = 20;
 
         ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
