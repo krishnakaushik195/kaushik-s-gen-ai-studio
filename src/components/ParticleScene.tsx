@@ -45,7 +45,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     rendererRef.current = renderer;
 
     // Create particles
-    const count = 12000;
+    const count = 15000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
@@ -132,7 +132,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       if (!ctx) return [];
 
       // Dynamic font size based on text length
-      const fontSize = text.length > 10 ? 60 : 100;
+      const fontSize = text.length > 14 ? 50 : text.length > 10 ? 65 : 100;
       const padding = 20;
 
       ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
@@ -296,7 +296,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         const THREE = (window as any).THREE;
         const gsap = (window as any).gsap;
         const particles = particlesRef.current;
-        const count = 12000;
+        const count = 15000;
 
         currentStateRef.current = 'text';
         
@@ -305,7 +305,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         if (!ctx) return;
 
         // Dynamic font size based on text length
-        const fontSize = text.length > 10 ? 60 : 100;
+        const fontSize = text.length > 14 ? 50 : text.length > 10 ? 65 : 100;
         const padding = 20;
 
         ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
