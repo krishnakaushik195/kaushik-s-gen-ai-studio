@@ -55,7 +55,10 @@ export default {
           end: "hsl(var(--cosmic-end))",
         },
         neon: "hsl(var(--neon-glow))",
-        gold: "hsl(var(--gold))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
