@@ -45,7 +45,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     rendererRef.current = renderer;
 
     // Create particles
-    const count = 15000;
+    const count = 20000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
@@ -132,7 +132,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       if (!ctx) return [];
 
       // Dynamic font size based on text length
-      const fontSize = text.length > 14 ? 50 : text.length > 10 ? 65 : 100;
+      const fontSize = text.length > 14 ? 30 : text.length > 10 ? 50 : 80;
       const padding = 20;
 
       ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
@@ -159,12 +159,12 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           const x = (i / 4) % canvas.width;
           const y = Math.floor(i / 4 / canvas.width);
           
-          if (Math.random() < 0.3) {
-            points.push({
-              x: (x - canvas.width / 2) / (fontSize / 10),
-              y: -(y - canvas.height / 2) / (fontSize / 10),
-            });
-          }
+            if (Math.random() < 0.25) {
+              points.push({
+                x: (x - canvas.width / 2) / (fontSize / 8),
+                y: -(y - canvas.height / 2) / (fontSize / 8),
+              });
+            }
         }
       }
 
@@ -296,7 +296,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         const THREE = (window as any).THREE;
         const gsap = (window as any).gsap;
         const particles = particlesRef.current;
-        const count = 15000;
+        const count = 20000;
 
         currentStateRef.current = 'text';
         
@@ -305,7 +305,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         if (!ctx) return;
 
         // Dynamic font size based on text length
-        const fontSize = text.length > 14 ? 50 : text.length > 10 ? 65 : 100;
+        const fontSize = text.length > 14 ? 30 : text.length > 10 ? 50 : 80;
         const padding = 20;
 
         ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
@@ -332,10 +332,10 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
             const x = (i / 4) % canvas.width;
             const y = Math.floor(i / 4 / canvas.width);
             
-            if (Math.random() < 0.3) {
+            if (Math.random() < 0.25) {
               points.push({
-                x: (x - canvas.width / 2) / (fontSize / 10),
-                y: -(y - canvas.height / 2) / (fontSize / 10),
+                x: (x - canvas.width / 2) / (fontSize / 8),
+                y: -(y - canvas.height / 2) / (fontSize / 8),
               });
             }
           }
