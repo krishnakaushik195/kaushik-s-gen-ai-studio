@@ -70,7 +70,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
 
       const color = new THREE.Color();
       const depth = Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) / 8;
-      color.setHSL(0.125, 0.95, 0.65 + depth * 0.15);
+      color.setHSL(0.125, 1.0, 0.45 + depth * 0.2);
 
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
