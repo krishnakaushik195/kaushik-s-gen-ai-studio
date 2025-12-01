@@ -190,13 +190,13 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         if (i < textPoints.length) {
           targetPositions[i * 3] = textPoints[i].x;
           targetPositions[i * 3 + 1] = textPoints[i].y;
-          targetPositions[i * 3 + 2] = 0;
+          targetPositions[i * 3 + 2] = 2;
         } else {
           const angle = Math.random() * Math.PI * 2;
-          const radius = Math.random() * 20 + 10;
+          const radius = Math.random() * 30 + 20;
           targetPositions[i * 3] = Math.cos(angle) * radius;
           targetPositions[i * 3 + 1] = Math.sin(angle) * radius;
-          targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+          targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 20 - 15;
         }
       }
 
@@ -355,13 +355,13 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           if (i < points.length) {
             targetPositions[i * 3] = points[i].x;
             targetPositions[i * 3 + 1] = points[i].y;
-            targetPositions[i * 3 + 2] = 0;
+            targetPositions[i * 3 + 2] = 2;
           } else {
             const angle = Math.random() * Math.PI * 2;
-            const radius = Math.random() * 20 + 10;
+            const radius = Math.random() * 30 + 20;
             targetPositions[i * 3] = Math.cos(angle) * radius;
             targetPositions[i * 3 + 1] = Math.sin(angle) * radius;
-            targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+            targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 20 - 15;
           }
         }
 
