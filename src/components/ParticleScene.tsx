@@ -107,11 +107,22 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
 
     // Auto sequence
     const startSequence = () => {
-      const texts = ['WELCOME', 'KAUSHIK', 'GEN AI'];
+      const textConfigs = [
+        { lines: [{ text: 'WELCOME', size: 100 }] },
+        { lines: [
+          { text: 'this is', size: 30 },
+          { text: 'KAUSHIK', size: 100 }
+        ] },
+        { lines: [
+          { text: 'I am', size: 30 },
+          { text: 'GEN AI', size: 100 },
+          { text: 'developer', size: 30 }
+        ] }
+      ];
       
       const runSequence = () => {
-        const text = texts[sequenceRef.current % texts.length];
-        morphToTextInternal(text);
+        const config = textConfigs[sequenceRef.current % textConfigs.length];
+        morphToMultiLineText(config);
         sequenceRef.current++;
         
         setTimeout(() => {
@@ -126,27 +137,40 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     startSequence();
 
     // Text morphing functions
-    const createTextPoints = (text: string) => {
+    const createMultiLineTextPoints = (config: { lines: { text: string; size: number }[] }) => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       if (!ctx) return [];
 
-      const fontSize = 100;
       const padding = 20;
+      const lineSpacing = 1.2;
+      
+      // Calculate total height and max width
+      let totalHeight = 0;
+      let maxWidth = 0;
+      
+      const lineMetrics = config.lines.map(line => {
+        ctx.font = `bold ${line.size}px Space Grotesk, Arial, sans-serif`;
+        const metrics = ctx.measureText(line.text);
+        const height = line.size * lineSpacing;
+        totalHeight += height;
+        maxWidth = Math.max(maxWidth, metrics.width);
+        return { ...line, metrics, height };
+      });
 
-      ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
-      const textMetrics = ctx.measureText(text);
-      const textWidth = textMetrics.width;
-      const textHeight = fontSize;
+      canvas.width = maxWidth + padding * 2;
+      canvas.height = totalHeight + padding * 2;
 
-      canvas.width = textWidth + padding * 2;
-      canvas.height = textHeight + padding * 2;
-
-      ctx.fillStyle = 'white';
-      ctx.font = `bold ${fontSize}px Space Grotesk, Arial, sans-serif`;
-      ctx.textBaseline = 'middle';
-      ctx.textAlign = 'center';
-      ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+      // Draw each line
+      let currentY = padding;
+      lineMetrics.forEach(line => {
+        ctx.fillStyle = 'white';
+        ctx.font = `bold ${line.size}px Space Grotesk, Arial, sans-serif`;
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'center';
+        ctx.fillText(line.text, canvas.width / 2, currentY);
+        currentY += line.height;
+      });
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const pixels = imageData.data;
@@ -160,8 +184,8 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           
           if (Math.random() < 0.3) {
             points.push({
-              x: (x - canvas.width / 2) / (fontSize / 10),
-              y: -(y - canvas.height / 2) / (fontSize / 10),
+              x: (x - canvas.width / 2) / 10,
+              y: -(y - canvas.height / 2) / 10,
             });
           }
         }
@@ -170,11 +194,11 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       return points;
     };
 
-    const morphToTextInternal = (text: string) => {
+    const morphToMultiLineText = (config: { lines: { text: string; size: number }[] }) => {
       if (!particles || !gsap) return;
       
       currentStateRef.current = 'text';
-      const textPoints = createTextPoints(text);
+      const textPoints = createMultiLineTextPoints(config);
       const positions = particles.geometry.attributes.position.array;
       const targetPositions = new Float32Array(count * 3);
 
@@ -289,7 +313,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
 
   useEffect(() => {
     if (morphToText && particlesRef.current && (window as any).gsap) {
-      const morphToTextInternal = (text: string) => {
+      const morphToSingleText = (text: string) => {
         if (!particlesRef.current) return;
         
         const THREE = (window as any).THREE;
@@ -381,7 +405,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
         }, 3000);
       };
 
-      morphToTextInternal(morphToText);
+      morphToSingleText(morphToText);
     }
   }, [morphToText, onMorphComplete]);
 
