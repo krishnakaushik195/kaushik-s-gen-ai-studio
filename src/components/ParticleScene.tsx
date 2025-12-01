@@ -182,7 +182,20 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
           const x = (i / 4) % canvas.width;
           const y = Math.floor(i / 4 / canvas.width);
           
-          if (Math.random() < 0.3) {
+          // Find which line this pixel belongs to
+          let currentLineY = padding;
+          let samplingRate = 0.3;
+          
+          for (const line of lineMetrics) {
+            if (y >= currentLineY && y < currentLineY + line.height) {
+              // Use higher sampling rate for smaller text
+              samplingRate = line.size < 50 ? 0.7 : 0.3;
+              break;
+            }
+            currentLineY += line.height;
+          }
+          
+          if (Math.random() < samplingRate) {
             points.push({
               x: (x - canvas.width / 2) / 10,
               y: -(y - canvas.height / 2) / 10,
