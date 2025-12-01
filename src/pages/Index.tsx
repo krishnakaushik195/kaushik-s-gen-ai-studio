@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import ParticleScene from '@/components/ParticleScene';
+import { ChevronDown } from 'lucide-react';
 
 const Index = () => {
   const sceneRef = useRef<any>(null);
@@ -13,6 +14,13 @@ const Index = () => {
           morphToText=""
           onMorphComplete={() => {}}
         />
+        
+        {/* Scroll Down Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in cursor-pointer z-10"
+             onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
+          <span className="text-muted-foreground text-sm">Scroll Down</span>
+          <ChevronDown className="w-6 h-6 text-primary animate-bounce" />
+        </div>
       </section>
 
       {/* Projects Section */}
