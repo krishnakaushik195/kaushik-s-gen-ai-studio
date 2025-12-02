@@ -8,6 +8,7 @@ import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
 import aiChatbotRagImg from '@/assets/ai-chatbot-rag.jpg';
 import photographyStudioImg from '@/assets/photography-studio.jpg';
 import portfolioBuilderImg from '@/assets/portfolio-builder.jpg';
+import aiFinTechImg from '@/assets/ai-fintech-automation.jpg';
 
 const categories = [
   { id: 'all', name: 'All Projects', icon: Globe },
@@ -66,6 +67,16 @@ const projects = [
     category: 'ai-automation',
     rating: 5,
     review: 'Revolutionary platform! Simplified student portfolios instantly.'
+  },
+  {
+    id: '6',
+    title: 'AI FinTech Automation – Smart Budgeting & Financial Planning App',
+    description: 'AI-driven financial assistant for Gen-Z with automated budget planning, real-time spending insights, and smart money recommendations. Production-ready with secure KYC, bank integration, and cloud deployment.',
+    image: aiFinTechImg,
+    tags: ['AI', 'FinTech', 'Automation'],
+    category: 'ai-automation',
+    rating: 5,
+    review: 'Helps young users build healthy money habits effortlessly!'
   }
 ];
 
