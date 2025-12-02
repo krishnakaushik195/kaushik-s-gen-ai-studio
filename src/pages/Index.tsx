@@ -67,9 +67,13 @@ const Index = () => {
 
   return (
     <div className="relative w-full overflow-y-auto scroll-smooth">
-      {/* Hero Section with Particle Animation - Fixed background */}
+      {/* Hero Section with Particle Animation - Moves up on scroll */}
       <section 
-        className="fixed top-0 left-0 w-full h-full z-0"
+        className="fixed top-0 left-0 w-full h-screen z-0"
+        style={{
+          transform: `translateY(-${scrollProgress * 100}%)`,
+          transition: 'transform 0.1s ease-out'
+        }}
       >
         <ParticleScene 
           ref={sceneRef} 
