@@ -18,7 +18,7 @@ const StarryBackground = () => {
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
-    // Star class
+    // Star class with color variations
     class Star {
       x: number;
       y: number;
@@ -26,19 +26,41 @@ const StarryBackground = () => {
       opacity: number;
       twinkleSpeed: number;
       twinkleDirection: number;
+      color: string;
 
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2;
-        this.opacity = Math.random();
-        this.twinkleSpeed = Math.random() * 0.02 + 0.005;
+        this.size = Math.random() * 1 + 0.3; // Much smaller: 0.3 to 1.3
+        this.opacity = Math.random() * 0.6 + 0.2; // More subtle
+        this.twinkleSpeed = Math.random() * 0.01 + 0.003;
         this.twinkleDirection = Math.random() > 0.5 ? 1 : -1;
+        
+        // Tech-inspired colors: green, cyan, blue, white
+        const colors = [
+          '0, 255, 170',    // Cyan/green
+          '0, 255, 100',    // Green
+          '100, 200, 255',  // Light blue
+          '200, 150, 255',  // Purple
+          '255, 255, 255',  // White
+        ];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
       }
 
       draw() {
         if (!ctx) return;
-        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        
+        // Draw small glow
+        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
+        gradient.addColorStop(0, `rgba(${this.color}, ${this.opacity})`);
+        gradient.addColorStop(1, `rgba(${this.color}, 0)`);
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Draw core
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity * 1.2})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -47,7 +69,7 @@ const StarryBackground = () => {
       update() {
         // Twinkle effect
         this.opacity += this.twinkleSpeed * this.twinkleDirection;
-        if (this.opacity <= 0 || this.opacity >= 1) {
+        if (this.opacity <= 0.2 || this.opacity >= 0.8) {
           this.twinkleDirection *= -1;
         }
       }
@@ -70,8 +92,8 @@ const StarryBackground = () => {
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height * 0.5; // Top half of screen
-        this.length = Math.random() * 80 + 40;
-        this.speed = Math.random() * 8 + 6;
+        this.length = Math.random() * 60 + 30; // Smaller tail
+        this.speed = Math.random() * 10 + 8;
         this.opacity = 1;
         this.angle = Math.PI / 4; // 45 degrees
         this.tail = [];
@@ -80,9 +102,9 @@ const StarryBackground = () => {
       draw() {
         if (!ctx) return;
         
-        // Draw main shooting star
-        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.lineWidth = 2;
+        // Draw main shooting star with green/cyan color
+        ctx.strokeStyle = `rgba(0, 255, 170, ${this.opacity})`;
+        ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(
@@ -91,19 +113,24 @@ const StarryBackground = () => {
         );
         ctx.stroke();
 
-        // Draw glow
-        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 10);
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity * 0.8})`);
-        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        // Draw glow with tech color
+        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 8);
+        gradient.addColorStop(0, `rgba(0, 255, 170, ${this.opacity * 0.8})`);
+        gradient.addColorStop(0.5, `rgba(100, 200, 255, ${this.opacity * 0.3})`);
+        gradient.addColorStop(1, 'rgba(0, 255, 170, 0)');
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 10, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, 8, 0, Math.PI * 2);
         ctx.fill();
 
-        // Draw tail trail
+        // Draw tail trail with color gradient
         this.tail.forEach((point, index) => {
-          const size = (1 - index / this.tail.length) * 3;
-          ctx.fillStyle = `rgba(255, 255, 255, ${point.opacity})`;
+          const size = (1 - index / this.tail.length) * 2;
+          const mixRatio = index / this.tail.length;
+          const r = Math.floor(0 + mixRatio * 100);
+          const g = Math.floor(255 - mixRatio * 55);
+          const b = Math.floor(170 + mixRatio * 85);
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${point.opacity})`;
           ctx.beginPath();
           ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
           ctx.fill();
@@ -144,9 +171,9 @@ const StarryBackground = () => {
       }
     }
 
-    // Create stars
+    // Create more stars but smaller
     const stars: Star[] = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 300; i++) {
       stars.push(new Star());
     }
 
