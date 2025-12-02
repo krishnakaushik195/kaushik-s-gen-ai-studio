@@ -68,9 +68,23 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       positions[i * 3 + 1] = point.y + (Math.random() - 0.5) * 0.5;
       positions[i * 3 + 2] = point.z + (Math.random() - 0.5) * 0.5;
 
+      // Tech-inspired colors: green, cyan, blue, purple
+      const colorChoice = Math.random();
       const color = new THREE.Color();
-      const depth = Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) / 8;
-      color.setHSL(0.125, 1.0, 0.45 + depth * 0.2);
+      
+      if (colorChoice < 0.3) {
+        // Cyan/green
+        color.setRGB(0, 1, 0.67); // #00FFAA
+      } else if (colorChoice < 0.6) {
+        // Green
+        color.setRGB(0, 1, 0.4); // #00FF66
+      } else if (colorChoice < 0.8) {
+        // Light blue
+        color.setRGB(0.4, 0.78, 1); // #66C8FF
+      } else {
+        // Purple
+        color.setRGB(0.78, 0.59, 1); // #C896FF
+      }
 
       colors[i * 3] = color.r;
       colors[i * 3 + 1] = color.g;
@@ -81,11 +95,11 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.08,
+      size: 0.05, // Smaller particles
       vertexColors: true,
       blending: THREE.AdditiveBlending,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.9,
       sizeAttenuation: true,
     });
 
