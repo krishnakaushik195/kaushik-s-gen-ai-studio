@@ -2,27 +2,30 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ParticleScene from '@/components/ParticleScene';
 import { ChevronDown, ArrowRight } from 'lucide-react';
+import aiContentImg from '@/assets/ai-content-generator.jpg';
+import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
+import voiceAssistantImg from '@/assets/voice-assistant-bot.jpg';
 
 const projects = [
   {
     id: '1',
     title: 'AI Content Generator',
     description: 'Advanced AI-powered content creation platform with natural language processing.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80',
+    image: aiContentImg,
     tags: ['AI', 'NLP', 'React']
   },
   {
     id: '2',
     title: 'Cloud Monitoring & Slack AI Ops Bot',
     description: 'AI-powered DevOps automation with real-time cloud infrastructure monitoring and intelligent incident response.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80',
+    image: cloudMonitoringImg,
     tags: ['AIOps', 'Slack Bot', 'Cloud Monitoring']
   },
   {
     id: '3',
     title: 'Voice Assistant Bot',
     description: 'Intelligent voice-activated assistant with multi-language support.',
-    image: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?w=600&q=80',
+    image: voiceAssistantImg,
     tags: ['Voice AI', 'NLP', 'AWS']
   }
 ];

@@ -1,12 +1,15 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import aiContentImg from '@/assets/ai-content-generator.jpg';
+import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
+import voiceAssistantImg from '@/assets/voice-assistant-bot.jpg';
 
 const projectsData = {
   '1': {
     title: 'AI Content Generator',
     description: 'A powerful AI-driven content generation platform that creates engaging marketing copy, blog posts, and social media content using advanced language models.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+    image: aiContentImg,
     tech: ['React', 'TypeScript', 'OpenAI', 'TailwindCSS'],
     features: [
       'Multiple content types generation',
@@ -20,7 +23,7 @@ const projectsData = {
   '2': {
     title: 'Cloud Monitoring & Slack AI Ops Bot',
     description: 'AI-powered Slack Bot that connects directly to cloud infrastructure monitoring tools to provide real-time DevOps automation. Features live error monitoring, interactive AI assistant for root-cause analysis, and command execution from Slack.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+    image: cloudMonitoringImg,
     tech: ['Slack Bot API', 'Python', 'Grafana', 'AWS Lambda', 'LangChain'],
     features: [
       'Live cloud error monitoring with Grafana integration',
@@ -36,7 +39,7 @@ const projectsData = {
   '3': {
     title: 'Voice Assistant Bot',
     description: 'Intelligent voice-activated assistant with natural language processing, task automation, and multi-language support.',
-    image: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?w=800&q=80',
+    image: voiceAssistantImg,
     tech: ['Python', 'NLP', 'AWS', 'WebRTC'],
     features: [
       'Voice recognition',
