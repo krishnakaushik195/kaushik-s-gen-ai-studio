@@ -7,6 +7,7 @@ import databaseAgentImg from '@/assets/database-agent.jpg';
 import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
 import aiChatbotRagImg from '@/assets/ai-chatbot-rag.jpg';
 import photographyStudioImg from '@/assets/photography-studio.jpg';
+import portfolioBuilderImg from '@/assets/portfolio-builder.jpg';
 
 const categories = [
   { id: 'all', name: 'All Projects', icon: Globe },
@@ -55,6 +56,16 @@ const projects = [
     category: 'web-dev',
     rating: 5,
     review: 'Professional online presence launched. Smooth performance!'
+  },
+  {
+    id: '5',
+    title: 'Automated Student Portfolio Website Builder + AI Assistant',
+    description: 'Fully automated website generator that creates personalized portfolio websites for students with AI voice/chat assistant powered by Gemini. Includes dynamic templates, one-click AWS deployment, and admin dashboard.',
+    image: portfolioBuilderImg,
+    tags: ['AI', 'Automation', 'AWS'],
+    category: 'ai-automation',
+    rating: 5,
+    review: 'Revolutionary platform! Simplified student portfolios instantly.'
   }
 ];
 
