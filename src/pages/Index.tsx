@@ -5,7 +5,7 @@ import StarryBackground from '@/components/StarryBackground';
 import { ChevronDown, ArrowRight, Database, Zap, Globe, Star } from 'lucide-react';
 import databaseAgentImg from '@/assets/database-agent.jpg';
 import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
-import voiceAssistantImg from '@/assets/voice-assistant-bot.jpg';
+import aiChatbotRagImg from '@/assets/ai-chatbot-rag.jpg';
 
 const categories = [
   { id: 'all', name: 'All Projects', icon: Globe },
@@ -39,7 +39,7 @@ const projects = [
     id: '3',
     title: 'AI Chatbot Integration with Website RAG & Local LLM',
     description: 'Fully integrated AI chatbot using lightweight LLaMA model with RAG for accurate, context-aware responses directly from website content. Runs efficiently on low-power CPUs.',
-    image: voiceAssistantImg,
+    image: aiChatbotRagImg,
     tags: ['RAG', 'Local LLM', 'Chatbot'],
     category: 'integration',
     rating: 5,
