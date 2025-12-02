@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ParticleScene from '@/components/ParticleScene';
+import StarryBackground from '@/components/StarryBackground';
 import { ChevronDown, ArrowRight, Database, Zap, Globe } from 'lucide-react';
 import databaseAgentImg from '@/assets/database-agent.jpg';
 import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
@@ -79,10 +80,13 @@ const Index = () => {
       </div>
 
       {/* Projects Section with Fade-in on Scroll */}
-      <section className="relative w-full min-h-screen bg-background py-20 px-6 -mt-20">
-        {/* Background Gradient Effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <section className="relative w-full min-h-screen overflow-hidden py-20 px-6 -mt-20">
+        {/* Starry Background with Shooting Stars */}
+        <StarryBackground />
+        
+        {/* Subtle Gradient Overlays */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }} />
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-5xl md:text-7xl font-bold mb-6">
