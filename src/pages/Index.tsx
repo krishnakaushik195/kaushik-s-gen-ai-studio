@@ -175,8 +175,8 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Bento Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-fr">
+          {/* Creative Asymmetric Bento Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[280px]">
             {filteredProjects.length === 0 ? (
               <div className="lg:col-span-12 text-center py-20 glass-panel rounded-3xl">
                 <p className="text-muted-foreground text-xl">No projects found in this category</p>
@@ -184,110 +184,108 @@ const Index = () => {
             ) : (
               <>
                 {filteredProjects.map((project, index) => {
-                  // First project is large featured
-                  if (index === 0) {
-                    return (
-                      <div
-                        key={project.id}
-                        className="lg:col-span-7 lg:row-span-2 group relative overflow-hidden rounded-3xl cursor-pointer animate-fade-in"
-                        style={{ animationDelay: '0ms' }}
-                        onClick={() => navigate(`/project/${project.id}`)}
-            >
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                        <div className="relative h-full min-h-[500px] overflow-hidden glass-panel">
-                          <img
-                            src={project.image}
-                            alt={project.title}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-2"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-                          
-                          {/* Golden Star Rating - Top Right */}
-                          <div className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
-                            <div className="flex gap-0.5">
-                              {[...Array(project.rating)].map((_, i) => (
-                                <Star key={i} className="w-4 h-4 fill-gold text-gold" />
-                              ))}
-                            </div>
-                            <span className="text-gold text-sm font-bold">{project.rating}.0</span>
-                          </div>
-                          
-                          <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500 group-hover:translate-y-[-10px]">
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              {project.tags.map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="px-3 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                            <p className="text-gold text-sm italic mb-2 font-medium">"{project.review}"</p>
-                            <h3 className="text-3xl md:text-4xl font-bold mb-3 text-foreground neon-glow">
-                              {project.title}
-                            </h3>
-                            <p className="text-muted-foreground text-lg mb-4 line-clamp-2">
-                              {project.description}
-                            </p>
-                            <div className="flex items-center gap-3 text-primary font-bold group-hover:gap-5 transition-all">
-                              <span className="text-lg">Explore Project</span>
-                              <ArrowRight className="w-5 h-5 transform group-hover:translate-x-2 transition-transform" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }
+                  // Creative asymmetric layout pattern
+                  // Pattern: large, medium, tall, wide, medium, large...
+                  const layoutPatterns = [
+                    { col: 'lg:col-span-8', row: 'lg:row-span-2', minH: 'min-h-[580px]' }, // 0: Extra large hero
+                    { col: 'lg:col-span-4', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 1: Small square
+                    { col: 'lg:col-span-4', row: 'lg:row-span-2', minH: 'min-h-[580px]' }, // 2: Tall vertical
+                    { col: 'lg:col-span-8', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 3: Wide horizontal
+                    { col: 'lg:col-span-6', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 4: Medium
+                    { col: 'lg:col-span-6', row: 'lg:row-span-2', minH: 'min-h-[580px]' }, // 5: Large featured
+                  ];
                   
-                  // Other projects are medium size
+                  const pattern = layoutPatterns[index % layoutPatterns.length];
+                  const isLarge = pattern.row === 'lg:row-span-2';
+                  
+                  // Category-based gradient colors
+                  const gradientMap = {
+                    'ai-automation': 'from-primary/20 via-transparent to-purple-500/20',
+                    'integration': 'from-accent/20 via-transparent to-blue-500/20',
+                    'web-dev': 'from-secondary/20 via-transparent to-green-500/20',
+                  };
+                  
+                  const gradient = gradientMap[project.category as keyof typeof gradientMap] || 'from-primary/20 via-transparent to-accent/20';
+                  
                   return (
                     <div
                       key={project.id}
-                      className="lg:col-span-5 lg:row-span-1 group relative overflow-hidden rounded-3xl cursor-pointer animate-fade-in"
-                      style={{ animationDelay: `${index * 150}ms` }}
+                      className={`${pattern.col} ${pattern.row} group relative overflow-hidden rounded-3xl cursor-pointer animate-fade-in hover-scale`}
+                      style={{ 
+                        animationDelay: `${index * 100}ms`,
+                        transformOrigin: 'center'
+                      }}
                       onClick={() => navigate(`/project/${project.id}`)}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                      <div className="relative h-full min-h-[300px] overflow-hidden glass-panel">
+                      {/* Hover gradient overlay */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+                      
+                      {/* Connecting line decoration */}
+                      <div className="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute -bottom-3 -left-3 w-6 h-6 border-b-2 border-l-2 border-accent/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      <div className={`relative h-full ${pattern.minH} overflow-hidden glass-panel`}>
                         <img
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
+                          className={`w-full h-full object-cover transition-all duration-700 ${
+                            isLarge 
+                              ? 'group-hover:scale-110 group-hover:rotate-2' 
+                              : 'group-hover:scale-105 group-hover:brightness-110'
+                          }`}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                         
-                        {/* Golden Star Rating - Top Right */}
-                        <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
-                          <div className="flex gap-0.5">
-                            {[...Array(project.rating)].map((_, i) => (
-                              <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
-                            ))}
-                          </div>
-                          <span className="text-gold text-xs font-bold">{project.rating}.0</span>
+                        {/* Category badge - Top Left */}
+                        <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full glass-panel border border-primary/40">
+                          <span className="text-primary text-xs font-bold uppercase tracking-wider">
+                            {project.category.replace('-', ' ')}
+                          </span>
                         </div>
                         
-                        <div className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-500 group-hover:translate-y-[-8px]">
+                        {/* Golden Star Rating - Top Right */}
+                        <div className={`absolute top-4 right-4 flex items-center gap-2 ${
+                          isLarge ? 'px-4 py-2' : 'px-3 py-1.5'
+                        } rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40`}>
+                          <div className="flex gap-0.5">
+                            {[...Array(project.rating)].map((_, i) => (
+                              <Star key={i} className={`${isLarge ? 'w-4 h-4' : 'w-3.5 h-3.5'} fill-gold text-gold`} />
+                            ))}
+                          </div>
+                          <span className={`text-gold ${isLarge ? 'text-sm' : 'text-xs'} font-bold`}>{project.rating}.0</span>
+                        </div>
+                        
+                        <div className={`absolute bottom-0 left-0 right-0 ${
+                          isLarge ? 'p-8' : 'p-6'
+                        } transform transition-all duration-500 group-hover:translate-y-[-10px]`}>
                           <div className="flex flex-wrap gap-2 mb-3">
                             {project.tags.map((tag) => (
                               <span
                                 key={tag}
-                                className="px-2.5 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
+                                className={`${
+                                  isLarge ? 'px-3 py-1' : 'px-2.5 py-1'
+                                } rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40 transform group-hover:scale-110 transition-transform`}
                               >
                                 {tag}
                               </span>
                             ))}
                           </div>
-                          <p className="text-gold text-xs italic mb-2 font-medium">"{project.review}"</p>
-                          <h3 className="text-2xl font-bold mb-2 text-foreground">
+                          <p className={`text-gold ${isLarge ? 'text-sm' : 'text-xs'} italic mb-2 font-medium line-clamp-1`}>
+                            "{project.review}"
+                          </p>
+                          <h3 className={`${
+                            isLarge ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'
+                          } font-bold mb-2 text-foreground ${isLarge ? 'neon-glow' : ''} line-clamp-2`}>
                             {project.title}
                           </h3>
-                          <p className="text-muted-foreground text-sm line-clamp-2 mb-3">
+                          <p className={`text-muted-foreground ${
+                            isLarge ? 'text-base mb-4' : 'text-sm mb-3'
+                          } line-clamp-2`}>
                             {project.description}
                           </p>
-                          <div className="flex items-center gap-2 text-secondary font-bold group-hover:gap-4 transition-all">
-                            <span>View Details</span>
-                            <ArrowRight className="w-4 h-4" />
+                          <div className="flex items-center gap-2 text-primary font-bold group-hover:gap-4 transition-all">
+                            <span className={isLarge ? 'text-base' : 'text-sm'}>{isLarge ? 'Explore Project' : 'View Details'}</span>
+                            <ArrowRight className={`${isLarge ? 'w-5 h-5' : 'w-4 h-4'} transform group-hover:translate-x-2 transition-transform`} />
                           </div>
                         </div>
                       </div>
