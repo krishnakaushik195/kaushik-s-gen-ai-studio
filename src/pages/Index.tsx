@@ -307,12 +307,12 @@ const Index = () => {
           {/* Centered Heading */}
           <div className="text-center mb-12 animate-fade-in">
             <div className="flex justify-center mb-6">
-              <div className="inline-block px-4 py-2 rounded-full glass-panel border border-primary/40">
-                <span className="cosmic-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
+              <div className="inline-block px-4 py-2 rounded-full glass-panel border border-[hsl(var(--about-accent)_/_0.4)]">
+                <span className="about-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
               </div>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold">
-              <span className="cosmic-gradient neon-glow">My Story</span>
+            <h2 className="text-5xl md:text-7xl font-bold font-display">
+              <span className="about-gradient about-glow">My Story</span>
             </h2>
           </div>
 
@@ -326,8 +326,8 @@ const Index = () => {
                 
                 {/* Image container */}
                 <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                  <div className="relative overflow-hidden rounded-3xl border-2 border-primary/30 glass-panel">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--about-accent)_/_0.2)] to-[hsl(var(--about-secondary)_/_0.2)] rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                  <div className="relative overflow-hidden rounded-3xl border-2 border-[hsl(var(--about-accent)_/_0.3)] glass-panel">
                     <img
                       src={profilePhoto}
                       alt="Profile"
@@ -337,16 +337,16 @@ const Index = () => {
                   </div>
                   
                   {/* Corner decorations */}
-                  <div className="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-primary animate-pulse" />
-                  <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-accent animate-pulse" style={{ animationDelay: '500ms' }} />
+                  <div className="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-[hsl(var(--about-accent))] animate-pulse" />
+                  <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-[hsl(var(--about-secondary))] animate-pulse" style={{ animationDelay: '500ms' }} />
                 </div>
                 
                 {/* CTA Buttons under image */}
                 <div className="flex flex-col sm:flex-row gap-4 mt-8 animate-fade-in" style={{ animationDelay: '1200ms' }}>
-                  <button className="px-8 py-4 rounded-2xl glass-panel border border-primary/40 cosmic-gradient-bg font-bold hover:scale-105 transition-all hover:shadow-glow">
+                  <button className="px-8 py-4 rounded-2xl glass-panel border border-[hsl(var(--about-accent)_/_0.4)] about-gradient-bg font-bold hover:scale-105 transition-all hover:shadow-[0_0_40px_hsl(var(--about-accent)_/_0.4)]">
                     Let's Connect
                   </button>
-                  <button className="px-8 py-4 rounded-2xl glass-panel border border-accent/40 font-bold hover:scale-105 transition-all">
+                  <button className="px-8 py-4 rounded-2xl glass-panel border border-[hsl(var(--about-secondary)_/_0.4)] font-bold hover:scale-105 transition-all">
                     View Resume
                   </button>
                 </div>
@@ -373,7 +373,7 @@ const Index = () => {
 
           {/* Skills/Tech Stack - Full Width Below */}
           <div className="mt-16 space-y-8 animate-fade-in" style={{ animationDelay: '1000ms' }}>
-            <h3 className="text-4xl md:text-5xl font-bold cosmic-gradient neon-glow text-center">My bests</h3>
+            <h3 className="text-4xl md:text-5xl font-bold font-display about-gradient about-glow text-center">My bests</h3>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
@@ -410,12 +410,12 @@ const Index = () => {
               ].map((skill, i) => (
                 <div
                   key={skill.title}
-                  className="group relative p-6 rounded-2xl glass-panel border border-primary/30 hover:border-primary/60 transition-all duration-300 hover:shadow-glow hover:-translate-y-1 animate-fade-in"
+                  className="group relative p-6 rounded-2xl glass-panel border border-[hsl(var(--about-accent)_/_0.3)] hover:border-[hsl(var(--about-accent)_/_0.6)] transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--about-accent)_/_0.4)] hover:-translate-y-1 animate-fade-in"
                   style={{ animationDelay: `${1200 + i * 100}ms` }}
                 >
-                  <div className="absolute top-3 right-3 w-2 h-2 bg-primary rounded-full animate-pulse" />
+                  <div className="absolute top-3 right-3 w-2 h-2 bg-[hsl(var(--about-accent))] rounded-full animate-pulse" />
                   
-                  <h4 className="text-xl font-bold cosmic-gradient mb-3">{skill.title}</h4>
+                  <h4 className="text-xl font-bold font-display about-gradient mb-3">{skill.title}</h4>
                   <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{skill.description}</p>
                   
                   {skill.techs.length > 0 && (
@@ -423,7 +423,7 @@ const Index = () => {
                       {skill.techs.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 text-xs rounded-full glass-panel border border-accent/40 text-foreground font-medium"
+                          className="px-3 py-1 text-xs rounded-full glass-panel border border-[hsl(var(--about-secondary)_/_0.4)] text-foreground font-medium"
                         >
                           {tech}
                         </span>
