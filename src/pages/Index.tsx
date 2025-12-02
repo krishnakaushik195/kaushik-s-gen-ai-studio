@@ -9,6 +9,7 @@ import aiChatbotRagImg from '@/assets/ai-chatbot-rag.jpg';
 import photographyStudioImg from '@/assets/photography-studio.jpg';
 import portfolioBuilderImg from '@/assets/portfolio-builder.jpg';
 import aiFinTechImg from '@/assets/ai-fintech-automation.jpg';
+import profilePhoto from '@/assets/profile-photo.png';
 
 const categories = [
   { id: 'all', name: 'All Projects', icon: Globe },
@@ -294,6 +295,92 @@ const Index = () => {
                 })}
               </>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* About Me Section */}
+      <section className="relative w-full min-h-screen overflow-hidden py-20 px-6 z-10">
+        <StarryBackground />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Vertical Image Side */}
+            <div className="relative animate-fade-in order-2 lg:order-1">
+              <div className="relative max-w-md mx-auto lg:mx-0">
+                {/* Decorative elements */}
+                <div className="absolute -top-6 -left-6 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+                
+                {/* Image container */}
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                  <div className="relative overflow-hidden rounded-3xl border-2 border-primary/30 glass-panel">
+                    <img
+                      src={profilePhoto}
+                      alt="Profile"
+                      className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                  </div>
+                  
+                  {/* Corner decorations */}
+                  <div className="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-primary animate-pulse" />
+                  <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-accent animate-pulse" style={{ animationDelay: '500ms' }} />
+                </div>
+              </div>
+            </div>
+
+            {/* Story Side */}
+            <div className="space-y-8 animate-fade-in order-1 lg:order-2" style={{ animationDelay: '200ms' }}>
+              <div className="inline-block px-4 py-2 rounded-full glass-panel border border-primary/40">
+                <span className="cosmic-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
+              </div>
+              
+              <h2 className="text-5xl md:text-7xl font-bold leading-tight">
+                <span className="cosmic-gradient neon-glow">My Story</span>
+              </h2>
+              
+              <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
+                <p className="animate-fade-in" style={{ animationDelay: '400ms' }}>
+                  I'm a passionate AI automation specialist and full-stack developer who transforms complex business challenges into elegant, intelligent solutions. With a deep expertise in artificial intelligence, cloud infrastructure, and modern web technologies, I've helped numerous clients revolutionize their workflows.
+                </p>
+                
+                <p className="animate-fade-in" style={{ animationDelay: '600ms' }}>
+                  My journey in tech began with a fascination for how machines can learn and adapt. Today, I specialize in building AI-powered systems that don't just automate tasks—they understand context, make intelligent decisions, and continuously improve.
+                </p>
+                
+                <p className="animate-fade-in" style={{ animationDelay: '800ms' }}>
+                  From natural language processing to DevOps automation, from RAG-powered chatbots to fintech solutions, I bring a unique blend of technical expertise and creative problem-solving to every project.
+                </p>
+              </div>
+
+              {/* Skills/Tech Stack */}
+              <div className="space-y-4 animate-fade-in" style={{ animationDelay: '1000ms' }}>
+                <h3 className="text-xl font-bold cosmic-gradient">Core Expertise</h3>
+                <div className="flex flex-wrap gap-3">
+                  {['AI & Machine Learning', 'Natural Language Processing', 'Cloud Architecture', 'Full-Stack Development', 'DevOps & AIOps', 'API Integration'].map((skill, i) => (
+                    <span
+                      key={skill}
+                      className="px-4 py-2 rounded-full glass-panel border border-primary/40 cosmic-gradient-bg text-foreground font-medium hover:scale-110 transition-transform cursor-default"
+                      style={{ animationDelay: `${1000 + i * 100}ms` }}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA or Contact prompt */}
+              <div className="flex gap-4 animate-fade-in" style={{ animationDelay: '1200ms' }}>
+                <button className="px-8 py-4 rounded-2xl glass-panel border border-primary/40 cosmic-gradient-bg font-bold hover:scale-105 transition-all hover:shadow-glow">
+                  Let's Connect
+                </button>
+                <button className="px-8 py-4 rounded-2xl glass-panel border border-accent/40 font-bold hover:scale-105 transition-all">
+                  View Resume
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
