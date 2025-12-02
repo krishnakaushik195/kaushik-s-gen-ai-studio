@@ -26,15 +26,17 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
 
     // Scene setup
     const scene = new THREE.Scene();
+    const fullHeight = Math.max(window.innerHeight, document.documentElement.scrollHeight || 2000);
     const camera = new THREE.PerspectiveCamera(
       75,
-      window.innerWidth / window.innerHeight,
+      window.innerWidth / fullHeight,
       0.1,
       1000
     );
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    // Make renderer cover full document height for continuous particles
+    renderer.setSize(window.innerWidth, fullHeight);
     renderer.setClearColor(0x000000, 1);
     containerRef.current.appendChild(renderer.domElement);
 
@@ -54,9 +56,10 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       const phi = Math.acos(-1 + (2 * i) / count);
       const theta = Math.sqrt(count * Math.PI) * phi;
       
+      // Spread particles across larger vertical space to fill entire page
       return {
         x: 8 * Math.cos(theta) * Math.sin(phi),
-        y: 8 * Math.sin(theta) * Math.sin(phi),
+        y: (8 * Math.sin(theta) * Math.sin(phi)) + (Math.random() - 0.5) * 30, // Extended vertical spread
         z: 8 * Math.cos(phi),
       };
     };
@@ -295,9 +298,10 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
 
     // Handle resize
     const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      const fullHeight = Math.max(window.innerHeight, document.documentElement.scrollHeight || 2000);
+      camera.aspect = window.innerWidth / fullHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(window.innerWidth, fullHeight);
     };
 
     window.addEventListener('resize', handleResize);
