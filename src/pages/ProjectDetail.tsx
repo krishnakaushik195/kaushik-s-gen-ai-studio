@@ -1,21 +1,23 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import aiContentImg from '@/assets/ai-content-generator.jpg';
+import databaseAgentImg from '@/assets/database-agent.jpg';
 import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
 import voiceAssistantImg from '@/assets/voice-assistant-bot.jpg';
 
 const projectsData = {
   '1': {
-    title: 'AI Content Generator',
-    description: 'A powerful AI-driven content generation platform that creates engaging marketing copy, blog posts, and social media content using advanced language models.',
-    image: aiContentImg,
-    tech: ['React', 'TypeScript', 'OpenAI', 'TailwindCSS'],
+    title: 'Database Agent – Natural Language to Data Insights',
+    description: 'An intelligent Database Agent that allows users to query any structured database using plain natural language, without writing SQL. Features AI-powered query conversion, secure execution, and automated data visualization.',
+    image: databaseAgentImg,
+    tech: ['Python', 'FastAPI', 'LangChain', 'SQLAlchemy', 'Plotly'],
     features: [
-      'Multiple content types generation',
-      'Tone and style customization',
-      'Real-time preview',
-      'Export in various formats'
+      'Natural language to SQL conversion with schema understanding',
+      'Secure query execution on MySQL, PostgreSQL, MongoDB, SQL Server',
+      'Dynamic data visualization with auto chart selection',
+      'Context-aware learning fine-tuned on business data',
+      'JWT + role-based access for enterprise security',
+      'Eliminated analyst dependency for faster decisions'
     ],
     github: '#',
     demo: '#'

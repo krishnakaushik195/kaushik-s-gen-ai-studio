@@ -2,17 +2,17 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ParticleScene from '@/components/ParticleScene';
 import { ChevronDown, ArrowRight } from 'lucide-react';
-import aiContentImg from '@/assets/ai-content-generator.jpg';
+import databaseAgentImg from '@/assets/database-agent.jpg';
 import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
 import voiceAssistantImg from '@/assets/voice-assistant-bot.jpg';
 
 const projects = [
   {
     id: '1',
-    title: 'AI Content Generator',
-    description: 'Advanced AI-powered content creation platform with natural language processing.',
-    image: aiContentImg,
-    tags: ['AI', 'NLP', 'React']
+    title: 'Database Agent – Natural Language to Data Insights',
+    description: 'Intelligent AI agent that converts plain natural language into SQL queries with automated data visualization.',
+    image: databaseAgentImg,
+    tags: ['AI', 'NLP', 'Data Analytics']
   },
   {
     id: '2',
