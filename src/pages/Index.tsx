@@ -328,6 +328,16 @@ const Index = () => {
                   <div className="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-primary animate-pulse" />
                   <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-accent animate-pulse" style={{ animationDelay: '500ms' }} />
                 </div>
+                
+                {/* CTA Buttons under image */}
+                <div className="flex flex-col sm:flex-row gap-4 mt-8 animate-fade-in" style={{ animationDelay: '1200ms' }}>
+                  <button className="px-8 py-4 rounded-2xl glass-panel border border-primary/40 cosmic-gradient-bg font-bold hover:scale-105 transition-all hover:shadow-glow">
+                    Let's Connect
+                  </button>
+                  <button className="px-8 py-4 rounded-2xl glass-panel border border-accent/40 font-bold hover:scale-105 transition-all">
+                    View Resume
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -369,16 +379,6 @@ const Index = () => {
                     </span>
                   ))}
                 </div>
-              </div>
-
-              {/* CTA or Contact prompt */}
-              <div className="flex gap-4 animate-fade-in" style={{ animationDelay: '1200ms' }}>
-                <button className="px-8 py-4 rounded-2xl glass-panel border border-primary/40 cosmic-gradient-bg font-bold hover:scale-105 transition-all hover:shadow-glow">
-                  Let's Connect
-                </button>
-                <button className="px-8 py-4 rounded-2xl glass-panel border border-accent/40 font-bold hover:scale-105 transition-all">
-                  View Resume
-                </button>
               </div>
             </div>
           </div>
