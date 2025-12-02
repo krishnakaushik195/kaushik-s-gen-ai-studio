@@ -13,10 +13,10 @@ const projects = [
   },
   {
     id: '2',
-    title: 'Smart Analytics Dashboard',
-    description: 'Real-time analytics with predictive insights and beautiful visualizations.',
+    title: 'Cloud Monitoring & Slack AI Ops Bot',
+    description: 'AI-powered DevOps automation with real-time cloud infrastructure monitoring and intelligent incident response.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80',
-    tags: ['Analytics', 'D3.js', 'Python']
+    tags: ['AIOps', 'Slack Bot', 'Cloud Monitoring']
   },
   {
     id: '3',
