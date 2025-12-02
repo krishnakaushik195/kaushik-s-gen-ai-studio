@@ -50,7 +50,7 @@ const Index = () => {
     : projects.filter(p => p.category === selectedCategory);
 
   return (
-    <div className="relative w-full min-h-screen overflow-y-auto">
+    <div className="relative w-full min-h-screen overflow-y-auto scroll-smooth">
       {/* Hero Section with Particle Animation */}
       <section className="relative w-full h-screen">
         <ParticleScene 
@@ -58,6 +58,9 @@ const Index = () => {
           morphToText=""
           onMorphComplete={() => {}}
         />
+        
+        {/* Gradient Overlay for Smooth Transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent z-10" />
         
         {/* Scroll Down Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in cursor-pointer z-10"
@@ -67,9 +70,20 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section className="relative w-full min-h-screen bg-background py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+      {/* Connecting Wave Divider */}
+      <div className="relative -mt-1">
+        <svg className="w-full h-24 fill-background" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,80 350,80 600,50 C850,20 1050,20 1200,50 L1200,120 L0,120 Z" className="fill-primary/5" />
+          <path d="M0,20 C200,80 400,80 600,60 C800,40 1000,40 1200,60 L1200,120 L0,120 Z" className="fill-primary/10" />
+        </svg>
+      </div>
+
+      {/* Projects Section with Fade-in on Scroll */}
+      <section className="relative w-full min-h-screen bg-background py-20 px-6 -mt-20">
+        {/* Background Gradient Effects */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-5xl md:text-7xl font-bold mb-6">
               <span className="cosmic-gradient">AI Automation for Clients</span>
