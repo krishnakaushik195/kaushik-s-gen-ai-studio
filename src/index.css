@@ -96,4 +96,8 @@ All colors MUST be HSL.
   .neon-glow {
     text-shadow: 0 0 20px hsl(var(--neon-glow) / 0.8);
   }
+
+  .cosmic-gradient-bg {
+    background: linear-gradient(135deg, hsl(var(--cosmic-start) / 0.3), hsl(var(--cosmic-end) / 0.3));
+  }
 }
