@@ -107,6 +107,52 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     scene.add(particles);
     particlesRef.current = particles;
 
+    // Create static background stars
+    const starCount = 500;
+    const starGeometry = new THREE.BufferGeometry();
+    const starPositions = new Float32Array(starCount * 3);
+    const starColors = new Float32Array(starCount * 3);
+
+    for (let i = 0; i < starCount; i++) {
+      // Spread stars across a large area
+      starPositions[i * 3] = (Math.random() - 0.5) * 100;
+      starPositions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+      starPositions[i * 3 + 2] = (Math.random() - 0.5) * 50 - 20; // Behind particles
+
+      // Same tech colors as particles
+      const colorChoice = Math.random();
+      const color = new THREE.Color();
+      
+      if (colorChoice < 0.3) {
+        color.setRGB(0, 1, 0.67); // Cyan/green
+      } else if (colorChoice < 0.6) {
+        color.setRGB(0, 1, 0.4); // Green
+      } else if (colorChoice < 0.8) {
+        color.setRGB(0.4, 0.78, 1); // Light blue
+      } else {
+        color.setRGB(0.78, 0.59, 1); // Purple
+      }
+
+      starColors[i * 3] = color.r;
+      starColors[i * 3 + 1] = color.g;
+      starColors[i * 3 + 2] = color.b;
+    }
+
+    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+    const starMaterial = new THREE.PointsMaterial({
+      size: 0.07, // Same size as main particles
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+      transparent: true,
+      opacity: 0.6, // Slightly dimmer for background effect
+      sizeAttenuation: true,
+    });
+
+    const staticStars = new THREE.Points(starGeometry, starMaterial);
+    scene.add(staticStars); // Add before main particles so they're behind
+
     // Animation loop
     const animate = () => {
       animationFrameRef.current = requestAnimationFrame(animate);
@@ -312,6 +358,8 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
       }
       geometry.dispose();
       material.dispose();
+      starGeometry.dispose();
+      starMaterial.dispose();
       renderer.dispose();
     };
   }, []);
