@@ -31,7 +31,7 @@ const StarryBackground = () => {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 0.3 + 0.5; // Tiny: 0.5 to 0.8 pixels, matching particle scale
+        this.size = Math.random() * 0.5 + 1; // 1 to 1.5 pixels, matching particle scale
         this.opacity = Math.random() * 0.6 + 0.3;
         this.twinkleSpeed = Math.random() * 0.01 + 0.003;
         this.twinkleDirection = Math.random() > 0.5 ? 1 : -1;
