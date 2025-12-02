@@ -95,7 +95,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.05, // Smaller particles
+      size: 0.15, // Particle size
       vertexColors: true,
       blending: THREE.AdditiveBlending,
       transparent: true,
