@@ -89,35 +89,46 @@ const ProjectDetail = () => {
         </div>
       </header>
 
-      {/* Hero Image */}
-      <div className="relative w-full h-[60vh] overflow-hidden">
+      {/* Hero Image with Parallax Effect */}
+      <div className="relative w-full h-[70vh] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10" />
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover scale-110 animate-fade-in"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+        
+        {/* Floating Elements */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl px-6">
+          <div className="text-center animate-fade-in" style={{ animationDelay: '200ms' }}>
+            <div className="inline-block glass-panel px-6 py-3 rounded-full mb-6">
+              <span className="cosmic-gradient text-sm font-bold">Featured Project</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-6 -mt-32 relative z-10 pb-20">
-        <div className="glass-panel p-8 rounded-lg mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+      <div className="max-w-5xl mx-auto px-6 -mt-40 relative z-10 pb-20">
+        <div className="glass-panel p-10 rounded-3xl mb-8 shadow-glow animate-fade-in" style={{ animationDelay: '300ms' }}>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 neon-glow">
             <span className="cosmic-gradient">{project.title}</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-xl text-muted-foreground leading-relaxed">
             {project.description}
           </p>
         </div>
 
         {/* Tech Stack */}
-        <div className="glass-panel p-6 rounded-lg mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-foreground">Tech Stack</h2>
-          <div className="flex flex-wrap gap-3">
-            {project.tech.map((tech) => (
+        <div className="glass-panel p-8 rounded-3xl mb-8 hover:shadow-glow transition-all animate-fade-in" style={{ animationDelay: '400ms' }}>
+          <h2 className="text-3xl font-bold mb-6 text-foreground">Tech Stack</h2>
+          <div className="flex flex-wrap gap-4">
+            {project.tech.map((tech, index) => (
               <span
                 key={tech}
-                className="px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium"
+                className="px-6 py-3 rounded-2xl bg-primary/10 text-primary border-2 border-primary/30 text-base font-bold hover:scale-110 hover:bg-primary/20 transition-all cursor-default animate-fade-in"
+                style={{ animationDelay: `${500 + index * 100}ms` }}
               >
                 {tech}
               </span>
@@ -126,16 +137,22 @@ const ProjectDetail = () => {
         </div>
 
         {/* Features */}
-        <div className="glass-panel p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4 text-foreground">Key Features</h2>
-          <ul className="space-y-3">
+        <div className="glass-panel p-8 rounded-3xl hover:shadow-glow transition-all animate-fade-in" style={{ animationDelay: '600ms' }}>
+          <h2 className="text-3xl font-bold mb-6 text-foreground">Key Features</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {project.features.map((feature, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                <span className="text-muted-foreground">{feature}</span>
-              </li>
+              <div 
+                key={index} 
+                className="flex items-start gap-4 p-4 rounded-2xl bg-muted/20 hover:bg-muted/30 transition-all group animate-fade-in"
+                style={{ animationDelay: `${700 + index * 100}ms` }}
+              >
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <span className="text-primary-foreground font-bold text-sm">{index + 1}</span>
+                </div>
+                <span className="text-foreground font-medium leading-relaxed">{feature}</span>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </div>
