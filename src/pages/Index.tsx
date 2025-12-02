@@ -175,7 +175,7 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Creative Asymmetric Bento Grid Layout */}
+          {/* Balanced Bento Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[280px]">
             {filteredProjects.length === 0 ? (
               <div className="lg:col-span-12 text-center py-20 glass-panel rounded-3xl">
@@ -184,15 +184,15 @@ const Index = () => {
             ) : (
               <>
                 {filteredProjects.map((project, index) => {
-                  // Creative asymmetric layout pattern
-                  // Pattern: large, medium, tall, wide, medium, large...
+                  // Balanced layout pattern that fits perfectly in 12-column grid
+                  // Pattern repeats every 6 projects for perfect alignment
                   const layoutPatterns = [
-                    { col: 'lg:col-span-8', row: 'lg:row-span-2', minH: 'min-h-[580px]' }, // 0: Extra large hero
-                    { col: 'lg:col-span-4', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 1: Small square
-                    { col: 'lg:col-span-4', row: 'lg:row-span-2', minH: 'min-h-[580px]' }, // 2: Tall vertical
-                    { col: 'lg:col-span-8', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 3: Wide horizontal
-                    { col: 'lg:col-span-6', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 4: Medium
-                    { col: 'lg:col-span-6', row: 'lg:row-span-2', minH: 'min-h-[580px]' }, // 5: Large featured
+                    { col: 'lg:col-span-7', row: 'lg:row-span-2', minH: 'min-h-[580px]' }, // 0: Large hero (7x2)
+                    { col: 'lg:col-span-5', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 1: Medium (5x1)
+                    { col: 'lg:col-span-5', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 2: Medium (5x1)
+                    { col: 'lg:col-span-7', row: 'lg:row-span-2', minH: 'min-h-[580px]' }, // 3: Large featured (7x2)
+                    { col: 'lg:col-span-6', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 4: Half (6x1)
+                    { col: 'lg:col-span-6', row: 'lg:row-span-1', minH: 'min-h-[280px]' }, // 5: Half (6x1)
                   ];
                   
                   const pattern = layoutPatterns[index % layoutPatterns.length];
