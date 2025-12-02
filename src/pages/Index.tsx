@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ParticleScene from '@/components/ParticleScene';
 import StarryBackground from '@/components/StarryBackground';
@@ -45,15 +45,36 @@ const Index = () => {
   const sceneRef = useRef<any>(null);
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const filteredProjects = selectedCategory === 'all' 
     ? projects 
     : projects.filter(p => p.category === selectedCategory);
 
+  // Track scroll to move particle animation upward
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      // Calculate progress (0 to 1) based on scroll
+      const progress = Math.min(scrollPosition / windowHeight, 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="relative w-full min-h-screen overflow-y-auto scroll-smooth">
-      {/* Hero Section with Particle Animation */}
-      <section className="relative w-full h-screen">
+    <div className="relative w-full overflow-y-auto scroll-smooth">
+      {/* Hero Section with Particle Animation - Moves up on scroll */}
+      <section 
+        className="fixed top-0 left-0 w-full h-screen z-0"
+        style={{
+          transform: `translateY(-${scrollProgress * 100}%)`,
+          transition: 'transform 0.1s ease-out'
+        }}
+      >
         <ParticleScene 
           ref={sceneRef} 
           morphToText=""
@@ -61,15 +82,21 @@ const Index = () => {
         />
         
         {/* Scroll Down Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in cursor-pointer z-10"
-             onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
+        <div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in cursor-pointer z-10"
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          style={{ opacity: 1 - scrollProgress }}
+        >
           <span className="text-muted-foreground text-sm">Scroll Down</span>
           <ChevronDown className="w-6 h-6 text-primary animate-bounce" />
         </div>
       </section>
 
-      {/* Projects Section - Continuous with starry background */}
-      <section className="relative w-full min-h-screen overflow-hidden py-20 px-6">
+      {/* Spacer to allow scrolling */}
+      <div className="h-screen" />
+
+      {/* Projects Section - Comes up from below */}
+      <section className="relative w-full min-h-screen overflow-hidden py-20 px-6 z-10">
         {/* Starry Background with Shooting Stars */}
         <StarryBackground />
         
