@@ -18,15 +18,17 @@ const projectsData = {
     demo: '#'
   },
   '2': {
-    title: 'Smart Analytics Dashboard',
-    description: 'Real-time analytics platform with AI-powered insights, predictive analytics, and beautiful data visualizations for business intelligence.',
+    title: 'Cloud Monitoring & Slack AI Ops Bot',
+    description: 'AI-powered Slack Bot that connects directly to cloud infrastructure monitoring tools to provide real-time DevOps automation. Features live error monitoring, interactive AI assistant for root-cause analysis, and command execution from Slack.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-    tech: ['React', 'D3.js', 'Python', 'TensorFlow'],
+    tech: ['Slack Bot API', 'Python', 'Grafana', 'AWS Lambda', 'LangChain'],
     features: [
-      'Real-time data processing',
-      'Predictive analytics',
-      'Custom dashboard builder',
-      'Interactive visualizations'
+      'Live cloud error monitoring with Grafana integration',
+      'Automated Slack incident alerts with severity levels',
+      'Interactive AI assistant for root-cause analysis',
+      'Command execution from Slack with role-based permissions',
+      'Web dashboard with error history and AI insights',
+      '60% reduction in incident response time'
     ],
     github: '#',
     demo: '#'
