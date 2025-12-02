@@ -128,14 +128,14 @@ const Index = () => {
                     onClick={() => setSelectedCategory(category.id)}
                     className={`group px-6 py-3 rounded-2xl font-bold transition-all duration-300 flex items-center gap-3 ${
                       selectedCategory === category.id
-                        ? 'bg-primary text-primary-foreground shadow-glow scale-105'
-                        : 'glass-panel hover:bg-primary/10 hover:scale-105'
+                        ? 'glass-panel shadow-glow scale-105'
+                        : 'glass-panel hover:scale-105'
                     }`}
                   >
-                    <Icon className={`w-5 h-5 transition-transform group-hover:rotate-12 ${
+                    <Icon className={`w-5 h-5 transition-transform group-hover:rotate-12 cosmic-gradient ${
                       selectedCategory === category.id ? 'animate-pulse' : ''
                     }`} />
-                    <span>{category.name}</span>
+                    <span className="cosmic-gradient">{category.name}</span>
                   </button>
                 );
               })}
