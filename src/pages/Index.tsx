@@ -304,10 +304,10 @@ const Index = () => {
         <StarryBackground />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start lg:items-center">
             {/* Vertical Image Side */}
             <div className="relative animate-fade-in order-2 lg:order-1">
-              <div className="relative max-w-md mx-auto lg:mx-0">
+              <div className="relative max-w-sm mx-auto lg:mx-0">
                 {/* Decorative elements */}
                 <div className="absolute -top-6 -left-6 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
                 <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
@@ -343,7 +343,7 @@ const Index = () => {
 
             {/* Story Side */}
             <div className="space-y-8 animate-fade-in order-1 lg:order-2" style={{ animationDelay: '200ms' }}>
-              <div className="flex justify-center lg:justify-start">
+              <div className="flex justify-center">
                 <div className="inline-block px-4 py-2 rounded-full glass-panel border border-primary/40">
                   <span className="cosmic-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
                 </div>
