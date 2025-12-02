@@ -343,8 +343,10 @@ const Index = () => {
 
             {/* Story Side */}
             <div className="space-y-8 animate-fade-in order-1 lg:order-2" style={{ animationDelay: '200ms' }}>
-              <div className="inline-block px-4 py-2 rounded-full glass-panel border border-primary/40">
-                <span className="cosmic-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
+              <div className="flex justify-center lg:justify-start">
+                <div className="inline-block px-4 py-2 rounded-full glass-panel border border-primary/40">
+                  <span className="cosmic-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
+                </div>
               </div>
               
               <h2 className="text-5xl md:text-7xl font-bold leading-tight">
