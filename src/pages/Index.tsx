@@ -161,164 +161,117 @@ const Index = () => {
               </div>
             ) : (
               <>
-                {/* Large Featured Project - Spans more space */}
-                {filteredProjects[0] && (
-                  <div
-                    className="lg:col-span-7 lg:row-span-2 group relative overflow-hidden rounded-3xl cursor-pointer animate-fade-in"
-                    style={{ animationDelay: '0ms' }}
-                    onClick={() => navigate(`/project/${filteredProjects[0].id}`)}
+                {filteredProjects.map((project, index) => {
+                  // First project is large featured
+                  if (index === 0) {
+                    return (
+                      <div
+                        key={project.id}
+                        className="lg:col-span-7 lg:row-span-2 group relative overflow-hidden rounded-3xl cursor-pointer animate-fade-in"
+                        style={{ animationDelay: '0ms' }}
+                        onClick={() => navigate(`/project/${project.id}`)}
             >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="relative h-full min-h-[500px] overflow-hidden glass-panel">
-                      <img
-                        src={filteredProjects[0].image}
-                        alt={filteredProjects[0].title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-2"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-                      
-                      {/* Golden Star Rating - Top Right */}
-                      <div className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
-                        <div className="flex gap-0.5">
-                          {[...Array(filteredProjects[0].rating)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 fill-gold text-gold" />
-                          ))}
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                        <div className="relative h-full min-h-[500px] overflow-hidden glass-panel">
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-2"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                          
+                          {/* Golden Star Rating - Top Right */}
+                          <div className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
+                            <div className="flex gap-0.5">
+                              {[...Array(project.rating)].map((_, i) => (
+                                <Star key={i} className="w-4 h-4 fill-gold text-gold" />
+                              ))}
+                            </div>
+                            <span className="text-gold text-sm font-bold">{project.rating}.0</span>
+                          </div>
+                          
+                          <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500 group-hover:translate-y-[-10px]">
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {project.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-3 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <p className="text-gold text-sm italic mb-2 font-medium">"{project.review}"</p>
+                            <h3 className="text-3xl md:text-4xl font-bold mb-3 text-foreground neon-glow">
+                              {project.title}
+                            </h3>
+                            <p className="text-muted-foreground text-lg mb-4 line-clamp-2">
+                              {project.description}
+                            </p>
+                            <div className="flex items-center gap-3 text-primary font-bold group-hover:gap-5 transition-all">
+                              <span className="text-lg">Explore Project</span>
+                              <ArrowRight className="w-5 h-5 transform group-hover:translate-x-2 transition-transform" />
+                            </div>
+                          </div>
                         </div>
-                        <span className="text-gold text-sm font-bold">{filteredProjects[0].rating}.0</span>
                       </div>
-                      
-                      <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500 group-hover:translate-y-[-10px]">
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {filteredProjects[0].tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-3 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
-                            >
-                              {tag}
-                            </span>
-                          ))}
+                    );
+                  }
+                  
+                  // Other projects are medium size
+                  return (
+                    <div
+                      key={project.id}
+                      className="lg:col-span-5 lg:row-span-1 group relative overflow-hidden rounded-3xl cursor-pointer animate-fade-in"
+                      style={{ animationDelay: `${index * 150}ms` }}
+                      onClick={() => navigate(`/project/${project.id}`)}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                      <div className="relative h-full min-h-[300px] overflow-hidden glass-panel">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                        
+                        {/* Golden Star Rating - Top Right */}
+                        <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
+                          <div className="flex gap-0.5">
+                            {[...Array(project.rating)].map((_, i) => (
+                              <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
+                            ))}
+                          </div>
+                          <span className="text-gold text-xs font-bold">{project.rating}.0</span>
                         </div>
-                        <p className="text-gold text-sm italic mb-2 font-medium">"{filteredProjects[0].review}"</p>
-                        <h3 className="text-3xl md:text-4xl font-bold mb-3 text-foreground neon-glow">
-                          {filteredProjects[0].title}
-                        </h3>
-                        <p className="text-muted-foreground text-lg mb-4 line-clamp-2">
-                          {filteredProjects[0].description}
-                        </p>
-                        <div className="flex items-center gap-3 text-primary font-bold group-hover:gap-5 transition-all">
-                          <span className="text-lg">Explore Project</span>
-                          <ArrowRight className="w-5 h-5 transform group-hover:translate-x-2 transition-transform" />
+                        
+                        <div className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-500 group-hover:translate-y-[-8px]">
+                          <div className="flex flex-wrap gap-2 mb-3">
+                            {project.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="px-2.5 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <p className="text-gold text-xs italic mb-2 font-medium">"{project.review}"</p>
+                          <h3 className="text-2xl font-bold mb-2 text-foreground">
+                            {project.title}
+                          </h3>
+                          <p className="text-muted-foreground text-sm line-clamp-2 mb-3">
+                            {project.description}
+                          </p>
+                          <div className="flex items-center gap-2 text-secondary font-bold group-hover:gap-4 transition-all">
+                            <span>View Details</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )}
-
-                {/* Second Project - Medium Size */}
-                {filteredProjects[1] && (
-                  <div
-                    className="lg:col-span-5 lg:row-span-1 group relative overflow-hidden rounded-3xl cursor-pointer animate-fade-in"
-                    style={{ animationDelay: '150ms' }}
-                    onClick={() => navigate(`/project/${filteredProjects[1].id}`)}
-            >
-                    <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="relative h-full min-h-[300px] overflow-hidden glass-panel">
-                      <img
-                        src={filteredProjects[1].image}
-                        alt={filteredProjects[1].title}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                      
-                      {/* Golden Star Rating - Top Right */}
-                      <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
-                        <div className="flex gap-0.5">
-                          {[...Array(filteredProjects[1].rating)].map((_, i) => (
-                            <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
-                          ))}
-                        </div>
-                        <span className="text-gold text-xs font-bold">{filteredProjects[1].rating}.0</span>
-                      </div>
-                      
-                      <div className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-500 group-hover:translate-y-[-8px]">
-                        <div className="flex flex-wrap gap-2 mb-3">
-                          {filteredProjects[1].tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-2.5 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <p className="text-gold text-xs italic mb-2 font-medium">"{filteredProjects[1].review}"</p>
-                        <h3 className="text-2xl font-bold mb-2 text-foreground">
-                          {filteredProjects[1].title}
-                        </h3>
-                        <p className="text-muted-foreground text-sm line-clamp-2 mb-3">
-                          {filteredProjects[1].description}
-                        </p>
-                        <div className="flex items-center gap-2 text-secondary font-bold group-hover:gap-4 transition-all">
-                          <span>View Details</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Third Project - Medium Size */}
-                {filteredProjects[2] && (
-                  <div
-                    className="lg:col-span-5 lg:row-span-1 group relative overflow-hidden rounded-3xl cursor-pointer animate-fade-in"
-                    style={{ animationDelay: '300ms' }}
-                    onClick={() => navigate(`/project/${filteredProjects[2].id}`)}
-            >
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="relative h-full min-h-[300px] overflow-hidden glass-panel">
-                      <img
-                        src={filteredProjects[2].image}
-                        alt={filteredProjects[2].title}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:saturate-150"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                      
-                      {/* Golden Star Rating - Top Right */}
-                      <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
-                        <div className="flex gap-0.5">
-                          {[...Array(filteredProjects[2].rating)].map((_, i) => (
-                            <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
-                          ))}
-                        </div>
-                        <span className="text-gold text-xs font-bold">{filteredProjects[2].rating}.0</span>
-                      </div>
-                      
-                      <div className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-500 group-hover:translate-y-[-8px]">
-                        <div className="flex flex-wrap gap-2 mb-3">
-                          {filteredProjects[2].tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-2.5 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <p className="text-gold text-xs italic mb-2 font-medium">"{filteredProjects[2].review}"</p>
-                        <h3 className="text-2xl font-bold mb-2 text-foreground">
-                          {filteredProjects[2].title}
-                        </h3>
-                        <p className="text-muted-foreground text-sm line-clamp-2 mb-3">
-                          {filteredProjects[2].description}
-                        </p>
-                        <div className="flex items-center gap-2 text-accent font-bold group-hover:gap-4 transition-all">
-                          <span>Discover More</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                  );
+                })}
               </>
             )}
           </div>
