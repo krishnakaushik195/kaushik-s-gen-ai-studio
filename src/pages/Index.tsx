@@ -6,6 +6,7 @@ import { ChevronDown, ArrowRight, Database, Zap, Globe, Star } from 'lucide-reac
 import databaseAgentImg from '@/assets/database-agent.jpg';
 import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
 import aiChatbotRagImg from '@/assets/ai-chatbot-rag.jpg';
+import photographyStudioImg from '@/assets/photography-studio.jpg';
 
 const categories = [
   { id: 'all', name: 'All Projects', icon: Globe },
@@ -44,6 +45,16 @@ const projects = [
     category: 'integration',
     rating: 5,
     review: 'Perfectly integrated with our site. Smart and fast!'
+  },
+  {
+    id: '4',
+    title: 'Photography Studio Website – Full-Stack Development & AWS Deployment',
+    description: 'Modern, fully responsive website for professional photography studio with custom photo galleries, client inquiry forms, and fast image loading. Deployed on AWS with CI/CD pipeline.',
+    image: photographyStudioImg,
+    tags: ['React', 'AWS', 'Full-Stack'],
+    category: 'web-dev',
+    rating: 5,
+    review: 'Professional online presence launched. Smooth performance!'
   }
 ];
 
