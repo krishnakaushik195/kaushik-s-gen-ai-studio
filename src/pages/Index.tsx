@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ParticleScene from '@/components/ParticleScene';
 import StarryBackground from '@/components/StarryBackground';
-import { ChevronDown, ArrowRight, Database, Zap, Globe } from 'lucide-react';
+import { ChevronDown, ArrowRight, Database, Zap, Globe, Star } from 'lucide-react';
 import databaseAgentImg from '@/assets/database-agent.jpg';
 import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
 import voiceAssistantImg from '@/assets/voice-assistant-bot.jpg';
@@ -21,7 +21,9 @@ const projects = [
     description: 'Intelligent AI agent that converts plain natural language into SQL queries with automated data visualization.',
     image: databaseAgentImg,
     tags: ['AI', 'NLP', 'Data Analytics'],
-    category: 'ai-automation'
+    category: 'ai-automation',
+    rating: 5,
+    review: 'Exceptional work! Transformed our data workflow completely.'
   },
   {
     id: '2',
@@ -29,7 +31,9 @@ const projects = [
     description: 'AI-powered DevOps automation with real-time cloud infrastructure monitoring and intelligent incident response.',
     image: cloudMonitoringImg,
     tags: ['AIOps', 'Slack Bot', 'Cloud Monitoring'],
-    category: 'integration'
+    category: 'integration',
+    rating: 5,
+    review: 'Game changer for our DevOps team. Highly recommended!'
   },
   {
     id: '3',
@@ -37,7 +41,9 @@ const projects = [
     description: 'Intelligent voice-activated assistant with multi-language support.',
     image: voiceAssistantImg,
     tags: ['Voice AI', 'NLP', 'AWS'],
-    category: 'ai-automation'
+    category: 'ai-automation',
+    rating: 5,
+    review: 'Outstanding quality and seamless integration.'
   }
 ];
 
@@ -160,17 +166,28 @@ const Index = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                       
+                      {/* Golden Star Rating - Top Right */}
+                      <div className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
+                        <div className="flex gap-0.5">
+                          {[...Array(filteredProjects[0].rating)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-gold text-gold" />
+                          ))}
+                        </div>
+                        <span className="text-gold text-sm font-bold">{filteredProjects[0].rating}.0</span>
+                      </div>
+                      
                       <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500 group-hover:translate-y-[-10px]">
                         <div className="flex flex-wrap gap-2 mb-4">
                           {filteredProjects[0].tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-3 py-1 rounded-full bg-primary/20 backdrop-blur-sm text-primary text-xs font-bold border border-primary/40"
+                              className="px-3 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
                             >
                               {tag}
                             </span>
                           ))}
                         </div>
+                        <p className="text-gold text-sm italic mb-2 font-medium">"{filteredProjects[0].review}"</p>
                         <h3 className="text-3xl md:text-4xl font-bold mb-3 text-foreground neon-glow">
                           {filteredProjects[0].title}
                         </h3>
@@ -202,17 +219,28 @@ const Index = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
                       
+                      {/* Golden Star Rating - Top Right */}
+                      <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
+                        <div className="flex gap-0.5">
+                          {[...Array(filteredProjects[1].rating)].map((_, i) => (
+                            <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
+                          ))}
+                        </div>
+                        <span className="text-gold text-xs font-bold">{filteredProjects[1].rating}.0</span>
+                      </div>
+                      
                       <div className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-500 group-hover:translate-y-[-8px]">
                         <div className="flex flex-wrap gap-2 mb-3">
                           {filteredProjects[1].tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-2.5 py-1 rounded-full bg-secondary/20 backdrop-blur-sm text-secondary text-xs font-bold border border-secondary/40"
+                              className="px-2.5 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
                             >
                               {tag}
                             </span>
                           ))}
                         </div>
+                        <p className="text-gold text-xs italic mb-2 font-medium">"{filteredProjects[1].review}"</p>
                         <h3 className="text-2xl font-bold mb-2 text-foreground">
                           {filteredProjects[1].title}
                         </h3>
@@ -244,17 +272,28 @@ const Index = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
                       
+                      {/* Golden Star Rating - Top Right */}
+                      <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/20 backdrop-blur-sm border border-gold/40">
+                        <div className="flex gap-0.5">
+                          {[...Array(filteredProjects[2].rating)].map((_, i) => (
+                            <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
+                          ))}
+                        </div>
+                        <span className="text-gold text-xs font-bold">{filteredProjects[2].rating}.0</span>
+                      </div>
+                      
                       <div className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-500 group-hover:translate-y-[-8px]">
                         <div className="flex flex-wrap gap-2 mb-3">
                           {filteredProjects[2].tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-2.5 py-1 rounded-full bg-accent/20 backdrop-blur-sm text-accent text-xs font-bold border border-accent/40"
+                              className="px-2.5 py-1 rounded-full cosmic-gradient-bg backdrop-blur-sm text-foreground text-xs font-bold border border-primary/40"
                             >
                               {tag}
                             </span>
                           ))}
                         </div>
+                        <p className="text-gold text-xs italic mb-2 font-medium">"{filteredProjects[2].review}"</p>
                         <h3 className="text-2xl font-bold mb-2 text-foreground">
                           {filteredProjects[2].title}
                         </h3>
