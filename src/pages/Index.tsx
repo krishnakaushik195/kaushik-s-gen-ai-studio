@@ -304,9 +304,21 @@ const Index = () => {
         <StarryBackground />
         
         <div className="max-w-7xl mx-auto relative z-10">
+          {/* Centered Heading */}
+          <div className="text-center mb-12 animate-fade-in">
+            <div className="flex justify-center mb-6">
+              <div className="inline-block px-4 py-2 rounded-full glass-panel border border-primary/40">
+                <span className="cosmic-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
+              </div>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-bold">
+              <span className="cosmic-gradient neon-glow">My Story</span>
+            </h2>
+          </div>
+
           <div className="grid lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start lg:items-center">
             {/* Vertical Image Side */}
-            <div className="relative animate-fade-in order-2 lg:order-1">
+            <div className="relative animate-fade-in">
               <div className="relative max-w-sm mx-auto lg:mx-0">
                 {/* Decorative elements */}
                 <div className="absolute -top-6 -left-6 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
@@ -342,17 +354,7 @@ const Index = () => {
             </div>
 
             {/* Story Side */}
-            <div className="space-y-8 animate-fade-in order-1 lg:order-2" style={{ animationDelay: '200ms' }}>
-              <div className="flex justify-center">
-                <div className="inline-block px-4 py-2 rounded-full glass-panel border border-primary/40">
-                  <span className="cosmic-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
-                </div>
-              </div>
-              
-              <h2 className="text-5xl md:text-7xl font-bold leading-tight">
-                <span className="cosmic-gradient neon-glow">My Story</span>
-              </h2>
-              
+            <div className="space-y-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
               <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
                 <p className="animate-fade-in" style={{ animationDelay: '400ms' }}>
                   I'm a passionate AI automation specialist and full-stack developer who transforms complex business challenges into elegant, intelligent solutions. With a deep expertise in artificial intelligence, cloud infrastructure, and modern web technologies, I've helped numerous clients revolutionize their workflows.
