@@ -54,10 +54,10 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20 animate-fade-in">
             <h2 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="cosmic-gradient">Featured Projects</span>
+              <span className="cosmic-gradient">AI Automation for Clients</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Innovative AI solutions that push boundaries
+              Proven AI solutions I've built for real businesses - transforming workflows with intelligent automation
             </p>
           </div>
           

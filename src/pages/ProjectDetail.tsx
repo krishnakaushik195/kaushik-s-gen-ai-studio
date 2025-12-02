@@ -103,7 +103,7 @@ const ProjectDetail = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl px-6">
           <div className="text-center animate-fade-in" style={{ animationDelay: '200ms' }}>
             <div className="inline-block glass-panel px-6 py-3 rounded-full mb-6">
-              <span className="cosmic-gradient text-sm font-bold">Featured Project</span>
+              <span className="cosmic-gradient text-sm font-bold">Client Project</span>
             </div>
           </div>
         </div>
