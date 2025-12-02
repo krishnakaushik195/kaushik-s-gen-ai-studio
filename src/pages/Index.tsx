@@ -37,13 +37,13 @@ const projects = [
   },
   {
     id: '3',
-    title: 'Voice Assistant Bot',
-    description: 'Intelligent voice-activated assistant with multi-language support.',
+    title: 'AI Chatbot Integration with Website RAG & Local LLM',
+    description: 'Fully integrated AI chatbot using lightweight LLaMA model with RAG for accurate, context-aware responses directly from website content. Runs efficiently on low-power CPUs.',
     image: voiceAssistantImg,
-    tags: ['Voice AI', 'NLP', 'AWS'],
-    category: 'ai-automation',
+    tags: ['RAG', 'Local LLM', 'Chatbot'],
+    category: 'integration',
     rating: 5,
-    review: 'Outstanding quality and seamless integration.'
+    review: 'Perfectly integrated with our site. Smart and fast!'
   }
 ];
 
