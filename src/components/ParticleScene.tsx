@@ -108,7 +108,7 @@ const ParticleScene = forwardRef(({ morphToText, onMorphComplete }: ParticleScen
     particlesRef.current = particles;
 
     // Create static background stars
-    const starCount = 500;
+    const starCount = 700;
     const starGeometry = new THREE.BufferGeometry();
     const starPositions = new Float32Array(starCount * 3);
     const starColors = new Float32Array(starCount * 3);
