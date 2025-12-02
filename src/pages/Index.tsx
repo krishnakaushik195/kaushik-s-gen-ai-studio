@@ -355,17 +355,66 @@ const Index = () => {
 
             {/* Story Side */}
             <div className="space-y-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <h3 className="text-2xl md:text-3xl font-bold font-display about-gradient animate-fade-in" style={{ animationDelay: '300ms' }}>
+                Builder of Practical AI
+              </h3>
+              
               <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
                 <p className="animate-fade-in" style={{ animationDelay: '400ms' }}>
-                  I'm a passionate AI automation specialist and full-stack developer who transforms complex business challenges into elegant, intelligent solutions. With a deep expertise in artificial intelligence, cloud infrastructure, and modern web technologies, I've helped numerous clients revolutionize their workflows.
+                  I'm an independent Generative AI Engineer and Freelance Solution Builder, helping companies turn advanced AI into real products that scale.
                 </p>
                 
-                <p className="animate-fade-in" style={{ animationDelay: '600ms' }}>
-                  My journey in tech began with a fascination for how machines can learn and adapt. Today, I specialize in building AI-powered systems that don't just automate tasks—they understand context, make intelligent decisions, and continuously improve.
+                <p className="animate-fade-in" style={{ animationDelay: '500ms' }}>
+                  I started my journey by experimenting with AI models, automation, and data agents — and quickly realized that every business wants AI, but very few know how to make it work in the real world. So I made that my mission:
                 </p>
+                
+                <p className="text-xl font-semibold about-gradient animate-fade-in" style={{ animationDelay: '600ms' }}>
+                  Take complex AI technology and deliver it as simple, powerful solutions.
+                </p>
+                
+                <div className="animate-fade-in" style={{ animationDelay: '700ms' }}>
+                  <p className="font-semibold text-foreground mb-3">Today:</p>
+                  <ul className="space-y-2 ml-6">
+                    <li className="relative before:content-['→'] before:absolute before:-left-6 before:text-[hsl(var(--about-accent))]">
+                      I develop and fine-tune LLM models for production use
+                    </li>
+                    <li className="relative before:content-['→'] before:absolute before:-left-6 before:text-[hsl(var(--about-accent))]">
+                      I build custom AI automation systems for SaaS, DevOps, Data, and FinTech
+                    </li>
+                    <li className="relative before:content-['→'] before:absolute before:-left-6 before:text-[hsl(var(--about-accent))]">
+                      I integrate AI into websites, products, and workflows
+                    </li>
+                    <li className="relative before:content-['→'] before:absolute before:-left-6 before:text-[hsl(var(--about-accent))]">
+                      I help teams go from idea → architecture → deployment → results
+                    </li>
+                  </ul>
+                </div>
                 
                 <p className="animate-fade-in" style={{ animationDelay: '800ms' }}>
-                  From natural language processing to DevOps automation, from RAG-powered chatbots to fintech solutions, I bring a unique blend of technical expertise and creative problem-solving to every project.
+                  I've worked as a contract AI architect for clients across India, Europe, the US, and other regions — building solutions that are actually being used in production today.
+                </p>
+                
+                <div className="animate-fade-in" style={{ animationDelay: '900ms' }}>
+                  <p className="mb-3">I'm also a founding member of three AI startups, where I designed:</p>
+                  <ul className="space-y-2 ml-6">
+                    <li className="relative before:content-['•'] before:absolute before:-left-4 before:text-[hsl(var(--about-secondary))]">
+                      AI agents for data intelligence
+                    </li>
+                    <li className="relative before:content-['•'] before:absolute before:-left-4 before:text-[hsl(var(--about-secondary))]">
+                      AIOps automation for cloud monitoring
+                    </li>
+                    <li className="relative before:content-['•'] before:absolute before:-left-4 before:text-[hsl(var(--about-secondary))]">
+                      FinTech budgeting intelligence for Gen-Z
+                    </li>
+                  </ul>
+                </div>
+                
+                <p className="animate-fade-in" style={{ animationDelay: '1000ms' }}>
+                  I love solving real problems — whether it's turning natural language into business insights, automating DevOps with AI, or launching fully AI-enabled digital products.
+                </p>
+                
+                <p className="text-xl font-semibold about-gradient animate-fade-in" style={{ animationDelay: '1100ms' }}>
+                  I believe the next generation of software will be AI-first, and I'm already building it.
                 </p>
               </div>
             </div>
