@@ -370,17 +370,65 @@ const Index = () => {
               </div>
 
               {/* Skills/Tech Stack */}
-              <div className="space-y-4 animate-fade-in" style={{ animationDelay: '1000ms' }}>
-                <h3 className="text-xl font-bold cosmic-gradient">Core Expertise</h3>
-                <div className="flex flex-wrap gap-3">
-                  {['AI & Machine Learning', 'Natural Language Processing', 'Cloud Architecture', 'Full-Stack Development', 'DevOps & AIOps', 'API Integration'].map((skill, i) => (
-                    <span
-                      key={skill}
-                      className="px-4 py-2 rounded-full glass-panel border border-primary/40 cosmic-gradient-bg text-foreground font-medium hover:scale-110 transition-transform cursor-default"
-                      style={{ animationDelay: `${1000 + i * 100}ms` }}
+              <div className="space-y-8 animate-fade-in" style={{ animationDelay: '1000ms' }}>
+                <h3 className="text-4xl md:text-5xl font-bold cosmic-gradient neon-glow">My bests</h3>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      title: 'Machine, Deep Learnings',
+                      description: 'Including natural language processing (NLP) and topics like LLM, empower us to unlock insights from data and drive innovation',
+                      techs: []
+                    },
+                    {
+                      title: 'OpenAi',
+                      description: 'Advancing AI with cutting-edge technologies',
+                      techs: ['GPT', 'HuggingFaces', 'Langchain']
+                    },
+                    {
+                      title: 'Web Development',
+                      description: 'Mastering CSS, JavaScript, and React, alongside MySQL, empowers me to create dynamic and responsive web applications with seamless data management.',
+                      techs: ['CSS', 'JavaScript', 'React', 'MySQL']
+                    },
+                    {
+                      title: 'Data Structures',
+                      description: 'My expertise spans arrays, hashmaps, trees, and graphs, enabling efficient data organization and manipulation for diverse computational tasks.',
+                      techs: ['Arrays', 'Hashmaps', 'Trees', 'Graphs']
+                    },
+                    {
+                      title: 'Image Processing',
+                      description: 'OpenCV, leveraging YOLO architectures revolutionizes object detection and recognition, propelling advancements in computer vision applications.',
+                      techs: ['OpenCV', 'YOLO']
+                    },
+                    {
+                      title: 'DevOps',
+                      description: "I'm adept at Linux, Docker, Kubernetes, and more, facilitating seamless deployment, scaling, and management of modern software solutions",
+                      techs: ['Linux', 'Docker', 'Kubernetes']
+                    }
+                  ].map((skill, i) => (
+                    <div
+                      key={skill.title}
+                      className="group relative p-6 rounded-2xl glass-panel border border-primary/30 hover:border-primary/60 transition-all duration-300 hover:shadow-glow hover:-translate-y-1 animate-fade-in"
+                      style={{ animationDelay: `${1200 + i * 100}ms` }}
                     >
-                      {skill}
-                    </span>
+                      <div className="absolute top-3 right-3 w-2 h-2 bg-primary rounded-full animate-pulse" />
+                      
+                      <h4 className="text-xl font-bold cosmic-gradient mb-3">{skill.title}</h4>
+                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{skill.description}</p>
+                      
+                      {skill.techs.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          {skill.techs.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-3 py-1 text-xs rounded-full glass-panel border border-accent/40 text-foreground font-medium"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>
