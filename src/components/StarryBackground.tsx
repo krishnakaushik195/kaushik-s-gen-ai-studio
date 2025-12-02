@@ -31,8 +31,8 @@ const StarryBackground = () => {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 0.5 + 0.3; // Much smaller: 0.3 to 0.8, matching particles
-        this.opacity = Math.random() * 0.6 + 0.2; // More subtle
+        this.size = Math.random() * 0.3 + 0.5; // Tiny: 0.5 to 0.8 pixels, matching particle scale
+        this.opacity = Math.random() * 0.6 + 0.3;
         this.twinkleSpeed = Math.random() * 0.01 + 0.003;
         this.twinkleDirection = Math.random() > 0.5 ? 1 : -1;
         
@@ -50,19 +50,19 @@ const StarryBackground = () => {
       draw() {
         if (!ctx) return;
         
-        // Draw small glow - smaller radius
-        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 1.5);
+        // Minimal glow to match particles
+        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 1.2);
         gradient.addColorStop(0, `rgba(${this.color}, ${this.opacity})`);
         gradient.addColorStop(1, `rgba(${this.color}, 0)`);
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size * 1.5, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size * 1.2, 0, Math.PI * 2);
         ctx.fill();
         
-        // Draw core - smaller
-        ctx.fillStyle = `rgba(${this.color}, ${this.opacity * 1.2})`;
+        // Tiny core matching particle size
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity * 1.3})`;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size * 0.8, 0, Math.PI * 2);
         ctx.fill();
       }
 
