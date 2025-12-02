@@ -60,9 +60,6 @@ const Index = () => {
           onMorphComplete={() => {}}
         />
         
-        {/* Gradient Overlay for Smooth Transition */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent z-10" />
-        
         {/* Scroll Down Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in cursor-pointer z-10"
              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
@@ -71,16 +68,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Connecting Wave Divider */}
-      <div className="relative -mt-1">
-        <svg className="w-full h-24 fill-background" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0 C150,80 350,80 600,50 C850,20 1050,20 1200,50 L1200,120 L0,120 Z" className="fill-primary/5" />
-          <path d="M0,20 C200,80 400,80 600,60 C800,40 1000,40 1200,60 L1200,120 L0,120 Z" className="fill-primary/10" />
-        </svg>
-      </div>
-
-      {/* Projects Section with Fade-in on Scroll */}
-      <section className="relative w-full min-h-screen overflow-hidden py-20 px-6 -mt-20">
+      {/* Projects Section - Continuous with starry background */}
+      <section className="relative w-full min-h-screen overflow-hidden py-20 px-6">
         {/* Starry Background with Shooting Stars */}
         <StarryBackground />
         
