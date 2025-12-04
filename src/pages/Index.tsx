@@ -86,6 +86,53 @@ const Index = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const [animatedSkills, setAnimatedSkills] = useState([0, 0, 0, 0]);
+  const [skillsInView, setSkillsInView] = useState(false);
+
+  const skills = [
+    { name: 'Python / C / JavaScript', percentage: 90 },
+    { name: 'HTML / CSS / React / MySQL', percentage: 97 },
+    { name: 'OOPs / NLP', percentage: 95 },
+    { name: 'Innovation & Design', percentage: 100 },
+  ];
+
+  // Animate skills when in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !skillsInView) {
+          setSkillsInView(true);
+          skills.forEach((skill, index) => {
+            let current = 0;
+            const target = skill.percentage;
+            const duration = 1500;
+            const increment = target / (duration / 16);
+            
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                current = target;
+                clearInterval(timer);
+              }
+              setAnimatedSkills(prev => {
+                const newSkills = [...prev];
+                newSkills[index] = Math.round(current);
+                return newSkills;
+              });
+            }, 16);
+          });
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (skillsRef.current) {
+      observer.observe(skillsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [skillsInView]);
 
   const filteredProjects = selectedCategory === 'all' 
     ? projects 
@@ -485,7 +532,7 @@ const Index = () => {
           </div>
 
           {/* My Skills - Progress Bars */}
-          <div className="mt-20 space-y-8 animate-fade-in" style={{ animationDelay: '1400ms' }}>
+          <div ref={skillsRef} className="mt-20 space-y-8 animate-fade-in" style={{ animationDelay: '1400ms' }}>
             <div className="flex items-center gap-4 justify-center mb-10">
               <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-transparent to-[hsl(var(--about-accent)_/_0.5)]" />
               <h3 className="text-4xl md:text-5xl font-bold font-display about-gradient about-glow">My Skills</h3>
@@ -493,12 +540,7 @@ const Index = () => {
             </div>
             
             <div className="max-w-3xl mx-auto space-y-6">
-              {[
-                { name: 'Python / C / JavaScript', percentage: 90 },
-                { name: 'HTML / CSS / React / MySQL', percentage: 97 },
-                { name: 'OOPs / NLP', percentage: 95 },
-                { name: 'Innovation & Design', percentage: 100 },
-              ].map((skill, i) => (
+              {skills.map((skill, i) => (
                 <div
                   key={skill.name}
                   className="animate-fade-in"
@@ -506,12 +548,12 @@ const Index = () => {
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-foreground font-semibold">{skill.name}</span>
-                    <span className="text-[hsl(var(--about-accent))] font-bold">{skill.percentage}%</span>
+                    <span className="text-[hsl(var(--about-accent))] font-bold text-lg tabular-nums">{animatedSkills[i]}%</span>
                   </div>
                   <div className="h-3 rounded-full bg-background/50 border border-[hsl(var(--about-accent)_/_0.3)] overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-[hsl(var(--about-accent))] to-[hsl(var(--about-secondary))] transition-all duration-1000 ease-out"
-                      style={{ width: `${skill.percentage}%` }}
+                      className="h-full rounded-full bg-gradient-to-r from-[hsl(var(--about-accent))] to-[hsl(var(--about-secondary))] transition-all duration-100 ease-out"
+                      style={{ width: `${animatedSkills[i]}%` }}
                     />
                   </div>
                 </div>
