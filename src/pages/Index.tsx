@@ -483,6 +483,41 @@ const Index = () => {
               ))}
             </div>
           </div>
+
+          {/* My Skills - Progress Bars */}
+          <div className="mt-20 space-y-8 animate-fade-in" style={{ animationDelay: '1400ms' }}>
+            <div className="flex items-center gap-4 justify-center mb-10">
+              <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-transparent to-[hsl(var(--about-accent)_/_0.5)]" />
+              <h3 className="text-4xl md:text-5xl font-bold font-display about-gradient about-glow">My Skills</h3>
+              <div className="h-px flex-1 max-w-24 bg-gradient-to-l from-transparent to-[hsl(var(--about-accent)_/_0.5)]" />
+            </div>
+            
+            <div className="max-w-3xl mx-auto space-y-6">
+              {[
+                { name: 'Python / C / JavaScript', percentage: 90 },
+                { name: 'HTML / CSS / React / MySQL', percentage: 97 },
+                { name: 'OOPs / NLP', percentage: 95 },
+                { name: 'Innovation & Design', percentage: 100 },
+              ].map((skill, i) => (
+                <div
+                  key={skill.name}
+                  className="animate-fade-in"
+                  style={{ animationDelay: `${1500 + i * 100}ms` }}
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-foreground font-semibold">{skill.name}</span>
+                    <span className="text-[hsl(var(--about-accent))] font-bold">{skill.percentage}%</span>
+                  </div>
+                  <div className="h-3 rounded-full bg-background/50 border border-[hsl(var(--about-accent)_/_0.3)] overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-[hsl(var(--about-accent))] to-[hsl(var(--about-secondary))] transition-all duration-1000 ease-out"
+                      style={{ width: `${skill.percentage}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
