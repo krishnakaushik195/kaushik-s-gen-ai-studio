@@ -304,21 +304,21 @@ const Index = () => {
         <StarryBackground />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          {/* Centered Heading */}
-          <div className="text-center mb-12 animate-fade-in">
-            <div className="flex justify-center mb-6">
-              <div className="inline-block px-4 py-2 rounded-full glass-panel border border-[hsl(var(--about-accent)_/_0.4)]">
-                <span className="about-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
-              </div>
-            </div>
-            <h2 className="text-5xl md:text-7xl font-bold font-display">
-              <span className="about-gradient about-glow">My Story</span>
-            </h2>
-          </div>
-
           <div className="grid lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start lg:items-center">
             {/* Vertical Image Side */}
             <div className="relative animate-fade-in">
+              {/* Heading above image */}
+              <div className="mb-8">
+                <div className="flex mb-4">
+                  <div className="inline-block px-4 py-2 rounded-full glass-panel border border-[hsl(var(--about-accent)_/_0.4)]">
+                    <span className="about-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
+                  </div>
+                </div>
+                <h2 className="text-4xl md:text-6xl font-bold font-display">
+                  <span className="about-gradient about-glow">My Story</span>
+                </h2>
+              </div>
+              
               <div className="relative max-w-sm mx-auto lg:mx-0">
                 {/* Decorative elements */}
                 <div className="absolute -top-6 -left-6 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
