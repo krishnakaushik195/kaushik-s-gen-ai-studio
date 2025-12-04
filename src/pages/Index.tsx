@@ -358,11 +358,11 @@ const Index = () => {
               <div className="mb-8">
                 <div className="flex mb-4">
                   <div className="inline-block px-4 py-2 rounded-full glass-panel border border-[hsl(var(--about-accent)_/_0.4)]">
-                    <span className="about-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
+                    <span className="cosmic-gradient text-sm font-bold uppercase tracking-wider">About Me</span>
                   </div>
                 </div>
                 <h2 className="text-4xl md:text-6xl font-bold font-display">
-                  <span className="about-gradient about-glow">My Story</span>
+                  <span className="cosmic-gradient">My Story</span>
                 </h2>
               </div>
               
@@ -469,7 +469,7 @@ const Index = () => {
 
           {/* Skills/Tech Stack - Full Width Below */}
           <div className="mt-16 space-y-8 animate-fade-in" style={{ animationDelay: '1000ms' }}>
-            <h3 className="text-4xl md:text-5xl font-bold font-display about-gradient about-glow text-center">My bests</h3>
+            <h3 className="text-4xl md:text-5xl font-bold font-display cosmic-gradient text-center">My bests</h3>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
@@ -535,7 +535,7 @@ const Index = () => {
           <div ref={skillsRef} className="mt-20 space-y-8 animate-fade-in" style={{ animationDelay: '1400ms' }}>
             <div className="flex items-center gap-4 justify-center mb-10">
               <div className="h-px flex-1 max-w-24 bg-gradient-to-r from-transparent to-[hsl(var(--about-accent)_/_0.5)]" />
-              <h3 className="text-4xl md:text-5xl font-bold font-display about-gradient about-glow">My Skills</h3>
+              <h3 className="text-4xl md:text-5xl font-bold font-display cosmic-gradient">My Skills</h3>
               <div className="h-px flex-1 max-w-24 bg-gradient-to-l from-transparent to-[hsl(var(--about-accent)_/_0.5)]" />
             </div>
             
@@ -570,12 +570,12 @@ const Index = () => {
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <div className="animate-fade-in">
             <div className="flex justify-center mb-6">
-              <div className="inline-block px-4 py-2 rounded-full glass-panel border border-[hsl(var(--about-accent)_/_0.4)]">
-                <span className="about-gradient text-sm font-bold uppercase tracking-wider">Get In Touch</span>
+              <div className="inline-block px-4 py-2 rounded-full glass-panel border border-primary/40">
+                <span className="cosmic-gradient text-sm font-bold uppercase tracking-wider">Get In Touch</span>
               </div>
             </div>
             <h2 className="text-5xl md:text-7xl font-bold font-display mb-8">
-              <span className="about-gradient about-glow">Contact Me</span>
+              <span className="cosmic-gradient">Contact Me</span>
             </h2>
             <p className="text-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
               Ready to bring AI into your business? Let's connect and discuss how I can help you build powerful, scalable solutions.
