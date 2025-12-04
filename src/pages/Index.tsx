@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ParticleScene from '@/components/ParticleScene';
 import StarryBackground from '@/components/StarryBackground';
-import { ChevronDown, ArrowRight, Database, Zap, Globe, Star } from 'lucide-react';
+import { ChevronDown, ArrowRight, Database, Zap, Globe, Star, Phone, Mail, Linkedin, Github } from 'lucide-react';
 import databaseAgentImg from '@/assets/database-agent.jpg';
 import cloudMonitoringImg from '@/assets/cloud-monitoring-bot.jpg';
 import aiChatbotRagImg from '@/assets/ai-chatbot-rag.jpg';
@@ -482,6 +482,101 @@ const Index = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="relative py-32 px-6 overflow-hidden about-gradient-bg">
+        <StarryBackground />
+        
+        <div className="max-w-4xl mx-auto relative z-10 text-center">
+          <div className="animate-fade-in">
+            <div className="flex justify-center mb-6">
+              <div className="inline-block px-4 py-2 rounded-full glass-panel border border-[hsl(var(--about-accent)_/_0.4)]">
+                <span className="about-gradient text-sm font-bold uppercase tracking-wider">Get In Touch</span>
+              </div>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-bold font-display mb-8">
+              <span className="about-gradient about-glow">Contact Me</span>
+            </h2>
+            <p className="text-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
+              Ready to bring AI into your business? Let's connect and discuss how I can help you build powerful, scalable solutions.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            {/* Phone */}
+            <a 
+              href="tel:+917207418556"
+              className="group p-6 rounded-2xl glass-panel border border-[hsl(var(--about-accent)_/_0.3)] hover:border-[hsl(var(--about-accent)_/_0.6)] transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--about-accent)_/_0.4)] hover:-translate-y-1 animate-fade-in"
+              style={{ animationDelay: '200ms' }}
+            >
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-[hsl(var(--about-accent)_/_0.2)] border border-[hsl(var(--about-accent)_/_0.4)]">
+                  <Phone className="w-6 h-6 text-[hsl(var(--about-accent))]" />
+                </div>
+                <div className="text-left">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Phone</p>
+                  <p className="text-foreground font-semibold">+91 7207418556</p>
+                </div>
+              </div>
+            </a>
+
+            {/* Email */}
+            <a 
+              href="mailto:krishnakaushik195@gmail.com"
+              className="group p-6 rounded-2xl glass-panel border border-[hsl(var(--about-accent)_/_0.3)] hover:border-[hsl(var(--about-accent)_/_0.6)] transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--about-accent)_/_0.4)] hover:-translate-y-1 animate-fade-in"
+              style={{ animationDelay: '300ms' }}
+            >
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-[hsl(var(--about-secondary)_/_0.2)] border border-[hsl(var(--about-secondary)_/_0.4)]">
+                  <Mail className="w-6 h-6 text-[hsl(var(--about-secondary))]" />
+                </div>
+                <div className="text-left">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Email</p>
+                  <p className="text-foreground font-semibold text-sm">krishnakaushik195@gmail.com</p>
+                </div>
+              </div>
+            </a>
+
+            {/* LinkedIn */}
+            <a 
+              href="https://www.linkedin.com/in/krishna-kaushik/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group p-6 rounded-2xl glass-panel border border-[hsl(var(--about-accent)_/_0.3)] hover:border-[hsl(var(--about-accent)_/_0.6)] transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--about-accent)_/_0.4)] hover:-translate-y-1 animate-fade-in"
+              style={{ animationDelay: '400ms' }}
+            >
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-[hsl(var(--about-warm)_/_0.2)] border border-[hsl(var(--about-warm)_/_0.4)]">
+                  <Linkedin className="w-6 h-6 text-[hsl(var(--about-warm))]" />
+                </div>
+                <div className="text-left">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">LinkedIn</p>
+                  <p className="text-foreground font-semibold">Krishna Kaushik</p>
+                </div>
+              </div>
+            </a>
+
+            {/* GitHub */}
+            <a 
+              href="https://github.com/krishnakaushik195"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group p-6 rounded-2xl glass-panel border border-[hsl(var(--about-accent)_/_0.3)] hover:border-[hsl(var(--about-accent)_/_0.6)] transition-all duration-300 hover:shadow-[0_0_40px_hsl(var(--about-accent)_/_0.4)] hover:-translate-y-1 animate-fade-in"
+              style={{ animationDelay: '500ms' }}
+            >
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-foreground/10 border border-foreground/20">
+                  <Github className="w-6 h-6 text-foreground" />
+                </div>
+                <div className="text-left">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">GitHub</p>
+                  <p className="text-foreground font-semibold">krishnakaushik195</p>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </section>
